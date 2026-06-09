@@ -23,178 +23,212 @@
 html,body{height:100%;width:100%;background:var(--bg);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:15px;overflow:hidden;overscroll-behavior:none}
 #app{display:flex;flex-direction:column;height:100vh;height:100dvh}
 
-/* STATUS */
+/* ─── STATUS BAR ─── */
 #sbar{display:flex;align-items:center;justify-content:space-between;padding:10px 18px 7px;font-size:11px;color:var(--mu);border-bottom:1px solid var(--bd);background:var(--bg);flex-shrink:0;z-index:10}
 .sdot{width:6px;height:6px;border-radius:50%;background:var(--dn);display:inline-block;margin-right:5px;transition:background .4s}
 .sdot.on{background:var(--ok)}
-#trip-hdr{font-family:'DM Serif Display',serif;font-size:13px;color:var(--tx)}
+#trip-hdr{font-family:'DM Serif Display',serif;font-size:13px;color:var(--tx);max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* SCREENS */
-.screen{flex:1;overflow-y:auto;overscroll-behavior:contain;padding-bottom:86px;display:none}
+/* ─── SCREENS ─── */
+.screen{flex:1;overflow-y:auto;overscroll-behavior:contain;padding-bottom:88px;display:none}
 .screen.active{display:block}
 
-/* NAV */
+/* ─── BOTTOM NAV ─── */
 #bnav{display:flex;background:var(--sf);border-top:1px solid var(--bd);flex-shrink:0;z-index:10}
-.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 0 14px;background:none;border:none;color:var(--mu);font-family:'DM Sans',sans-serif;font-size:10px;cursor:pointer;transition:color .2s;position:relative}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 0 13px;background:none;border:none;color:var(--mu);font-family:'DM Sans',sans-serif;font-size:10px;cursor:pointer;transition:color .2s;position:relative}
 .nb svg{width:21px;height:21px}
 .nb.active{color:var(--ac)}
 .ndot{width:4px;height:4px;border-radius:50%;background:var(--ac);opacity:0;transition:opacity .2s}
 .nb.active .ndot{opacity:1}
-.nbadge{position:absolute;top:7px;right:calc(50% - 20px);background:var(--dn);color:#fff;border-radius:8px;font-size:9px;font-weight:700;padding:1px 5px;display:none}
+.nbadge{position:absolute;top:7px;right:calc(50% - 18px);background:var(--dn);color:#fff;border-radius:8px;font-size:9px;font-weight:700;padding:1px 5px;display:none}
 
-/* SETUP */
-#setup-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:32px 20px}
-.logo{font-family:'DM Serif Display',serif;font-size:54px;line-height:1;background:linear-gradient(135deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;text-align:center}
-.tagline{color:var(--mu);font-size:13px;margin-bottom:32px;text-align:center}
-.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:24px 20px;width:100%;max-width:430px}
-.tab-row{display:flex;gap:0;background:var(--sf2);border-radius:10px;padding:3px;margin-bottom:18px}
+/* ─── SETUP SCREEN ─── */
+#setup-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:28px 20px}
+.logo{font-family:'DM Serif Display',serif;font-size:50px;line-height:1;background:linear-gradient(135deg,var(--ac),var(--ac2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:5px}
+.tagline{color:var(--mu);font-size:13px;margin-bottom:28px;text-align:center}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:22px 20px;width:100%;max-width:430px}
+.tab-row{display:flex;gap:0;background:var(--sf2);border-radius:10px;padding:3px;margin-bottom:16px}
 .tbtn{flex:1;padding:8px;border-radius:7px;border:none;background:none;color:var(--mu);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .2s}
 .tbtn.active{background:var(--sf);color:var(--tx)}
 
-/* FORM */
-.field{margin-bottom:14px}
-.field label{display:block;font-size:11px;color:var(--mu);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+/* ─── FORM ELEMENTS ─── */
+.field{margin-bottom:13px}
+.field label{display:block;font-size:11px;color:var(--mu);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
 .fi{width:100%;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--rs);color:var(--tx);font-family:'DM Sans',sans-serif;font-size:15px;padding:11px 13px;outline:none;transition:border-color .2s;-webkit-appearance:none}
 .fi:focus{border-color:var(--ac)}
-select.fi option{background:var(--sf2)}
-textarea.fi{resize:none;height:72px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 18px;border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:all .2s;width:100%}
+select.fi option{background:#1c1c26}
+textarea.fi{resize:none;height:68px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:12px 18px;border-radius:var(--rs);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:all .18s;width:100%}
 .btn:active{transform:scale(.97)}
 .bp{background:var(--ac);color:#0a0a0f}
 .bs{background:var(--sf2);color:var(--tx);border:1px solid var(--bd)}
-.bd2{background:rgba(240,96,96,.12);color:var(--dn);border:1px solid rgba(240,96,96,.25)}
-.bg{background:rgba(96,240,160,.12);color:var(--ok);border:1px solid rgba(96,240,160,.25)}
-
-/* CHIPS */
-.mchips{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
-.mchip{display:flex;align-items:center;gap:6px;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;padding:5px 10px 5px 6px;font-size:13px}
-.mchip button{background:none;border:none;color:var(--mu);cursor:pointer;font-size:15px;padding:0;line-height:1}
-.add-row{display:flex;gap:8px;margin-top:8px}
+.bdn{background:rgba(240,96,96,.12);color:var(--dn);border:1px solid rgba(240,96,96,.22)}
+.bg{background:rgba(96,240,160,.12);color:var(--ok);border:1px solid rgba(96,240,160,.22)}
+.add-row{display:flex;gap:8px;margin-top:7px}
 .add-row .fi{flex:1}
+.mchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.mchip{display:flex;align-items:center;gap:5px;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;padding:4px 9px 4px 5px;font-size:13px}
+.mchip button{background:none;border:none;color:var(--mu);cursor:pointer;font-size:14px;padding:0;line-height:1}
 
-/* SCREEN HEADER */
-.shdr{padding:16px 18px 10px;position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:1px solid var(--bd)}
-.shdr h1{font-family:'DM Serif Display',serif;font-size:26px}
+/* ─── SCREEN HEADER ─── */
+.shdr{padding:15px 18px 10px;position:sticky;top:0;background:var(--bg);z-index:5;border-bottom:1px solid var(--bd)}
+.shdr h1{font-family:'DM Serif Display',serif;font-size:25px}
 .shdr p{color:var(--mu);font-size:13px;margin-top:2px}
 
-/* EXPENSE LIST */
-.elist{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
-.ecard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:13px;cursor:pointer;transition:border-color .2s;animation:su .22s ease}
-.ecard.settled-card{opacity:.55}
-.ecard:active{border-color:var(--ac2)}
-.eicon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.einfo{flex:1;min-width:0}
-.etitle{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.emeta{font-size:12px;color:var(--mu);margin-top:2px}
-.eamt{text-align:right;flex-shrink:0}
-.eamt .tot{font-weight:600;font-size:17px}
-.eamt .per{font-size:11px;color:var(--mu);margin-top:1px}
-.sbadge{font-size:10px;color:var(--ok);background:rgba(96,240,160,.12);border-radius:6px;padding:1px 6px;margin-left:5px}
+/* ─── DASHBOARD ─── */
+.dash-hero{margin:14px 16px 0;background:linear-gradient(135deg,rgba(124,111,247,.18),rgba(200,240,96,.08));border:1px solid var(--bd);border-radius:var(--r);padding:20px}
+.dash-trip-name{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:2px}
+.dash-meta{font-size:12px;color:var(--mu);margin-bottom:16px}
+.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dstat{background:rgba(0,0,0,.25);border-radius:10px;padding:10px;text-align:center}
+.dstat-val{font-size:20px;font-weight:600}
+.dstat-lbl{font-size:10px;color:var(--mu);margin-top:2px}
 
-/* FAB */
-.fab{position:fixed;bottom:88px;right:18px;width:54px;height:54px;border-radius:17px;background:var(--ac);color:#0a0a0f;border:none;cursor:pointer;z-index:20;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(200,240,96,.28);font-size:26px;transition:transform .18s}
-.fab:active{transform:scale(.92)}
+.invite-strip{margin:12px 16px 0;background:var(--sf);border:1px solid var(--bd);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.invite-strip .ic-label{font-size:11px;color:var(--mu);letter-spacing:.04em;text-transform:uppercase}
+.invite-strip .ic-code{font-family:'DM Serif Display',serif;font-size:22px;letter-spacing:5px;color:var(--ac)}
+.invite-strip .ic-copy{background:rgba(200,240,96,.12);border:1px solid rgba(200,240,96,.2);color:var(--ac);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap}
 
-/* SUMMARY */
-.shero{margin:14px 16px;background:linear-gradient(135deg,rgba(124,111,247,.16),rgba(200,240,96,.07));border:1px solid var(--bd);border-radius:var(--r);padding:22px;text-align:center}
-.shero .slbl{font-size:11px;color:var(--mu);letter-spacing:.06em;text-transform:uppercase}
-.shero .sbig{font-family:'DM Serif Display',serif;font-size:46px;margin:4px 0}
-.shero .ssub{font-size:13px;color:var(--mu)}
-.sec{margin:0 16px 18px}
-.sectit{font-size:11px;color:var(--mu);letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px}
-.blist{display:flex;flex-direction:column;gap:8px}
-.brow{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rs);padding:11px 13px;display:flex;align-items:center;gap:11px}
-.bav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
-.binfo{flex:1}
-.bname{font-weight:500}
-.bsub{font-size:12px;color:var(--mu)}
-.bamt{font-weight:600;font-size:15px}
+.section{margin:14px 16px 0}
+.sec-tit{font-size:11px;color:var(--mu);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+
+/* category bar rows */
+.cat-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.cat-bar-icon{font-size:20px;flex-shrink:0;width:28px;text-align:center}
+.cat-bar-info{flex:1;min-width:0}
+.cat-bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.cat-bar-name{font-size:13px;font-weight:500}
+.cat-bar-amt{font-size:13px;font-weight:600}
+.cat-bar-track{height:5px;background:var(--sf2);border-radius:3px;overflow:hidden}
+.cat-bar-fill{height:100%;border-radius:3px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.cat-bar-pct{font-size:10px;color:var(--mu);margin-top:2px}
+
+/* person spend row */
+.person-row{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.pav{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
+.person-info{flex:1;min-width:0}
+.person-name{font-weight:500;font-size:14px}
+.person-sub{font-size:11px;color:var(--mu);margin-top:1px}
+.person-right{text-align:right}
+.person-amt{font-weight:600;font-size:15px}
+.person-bal{font-size:11px;margin-top:1px}
 .pos{color:var(--ok)}.neg{color:var(--dn)}
-.srow{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rs);padding:11px 13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.arrow{color:var(--ac);font-size:15px}
-.pill{background:var(--sf2);border-radius:20px;padding:3px 10px;font-size:13px}
-.sval{margin-left:auto;font-weight:600;color:var(--ac3)}
-.rec-btn{background:rgba(96,240,160,.12);color:var(--ok);border:1px solid rgba(96,240,160,.2);border-radius:8px;padding:5px 11px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
 
-/* CHARTS */
-.chart-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px;margin:0 16px 14px}
-.chart-tit{font-size:13px;font-weight:500;color:var(--mu);margin-bottom:12px}
-.chart-wrap{position:relative;width:100%;height:210px}
+/* chart cards */
+.chart-card{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin:14px 16px 0}
+.chart-tit{font-size:12px;font-weight:500;color:var(--mu);margin-bottom:10px;text-transform:uppercase;letter-spacing:.04em}
+.chart-wrap{position:relative;width:100%;height:190px}
+.chart-wrap.donut{height:200px}
 
-/* MEMBERS */
-.mgrid{padding:12px 16px;display:flex;flex-direction:column;gap:10px}
-.mcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:13px}
-.mav{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;flex-shrink:0}
+/* ─── EXPENSES SCREEN ─── */
+.elist{padding:10px 16px;display:flex;flex-direction:column;gap:9px}
+.ecard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:13px 15px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .18s;animation:su .22s ease}
+.ecard.settled-card{opacity:.5}
+.ecard:active{border-color:var(--ac2)}
+.eicon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.einfo{flex:1;min-width:0}
+.etit{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.emeta{font-size:12px;color:var(--mu);margin-top:1px}
+.eamt{text-align:right;flex-shrink:0}
+.eamt .tot{font-weight:600;font-size:16px}
+.eamt .per{font-size:11px;color:var(--mu);margin-top:1px}
+.sbadge{font-size:10px;color:var(--ok);background:rgba(96,240,160,.12);border-radius:5px;padding:1px 5px;margin-left:5px}
+.fab{position:fixed;bottom:88px;right:18px;width:52px;height:52px;border-radius:16px;background:var(--ac);color:#0a0a0f;border:none;cursor:pointer;z-index:20;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(200,240,96,.28);font-size:24px;transition:transform .18s}
+.fab:active{transform:scale(.92)}
+.frow{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:10px 16px 2px;scrollbar-width:none}
+.frow::-webkit-scrollbar{display:none}
+.fc{padding:6px 13px;border-radius:20px;font-size:13px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;transition:all .14s;color:var(--mu);white-space:nowrap}
+.fc.active{background:var(--ac);color:#0a0a0f;border-color:var(--ac);font-weight:600}
+
+/* ─── CATEGORY MANAGE SCREEN ─── */
+.cat-manage-item{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rs);padding:13px 15px;display:flex;align-items:center;gap:12px;margin-bottom:8px;animation:su .2s ease}
+.cat-manage-emoji{font-size:22px;width:36px;text-align:center}
+.cat-manage-name{flex:1;font-size:15px;font-weight:500}
+.cat-manage-count{font-size:12px;color:var(--mu);margin-right:6px}
+.cat-del{background:none;border:none;color:var(--dn);font-size:20px;cursor:pointer;padding:4px;line-height:1}
+.cat-add-form{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:16px;margin:14px 16px 0}
+.emoji-picker{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;max-height:120px;overflow-y:auto}
+.ep-btn{font-size:20px;padding:5px;border-radius:8px;cursor:pointer;border:2px solid transparent;background:var(--sf2);transition:all .12s;line-height:1}
+.ep-btn.sel{border-color:var(--ac);background:rgba(200,240,96,.1)}
+.locked-note{display:flex;align-items:center;gap:8px;background:rgba(124,111,247,.1);border:1px solid rgba(124,111,247,.2);border-radius:var(--rs);padding:12px 14px;margin:14px 16px 0;font-size:13px;color:var(--mu)}
+
+/* ─── MEMBERS SCREEN ─── */
+.mgrid{padding:10px 16px 0;display:flex;flex-direction:column;gap:9px}
+.mcard{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);padding:13px 15px;display:flex;align-items:center;gap:12px}
+.mav-lg{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;flex-shrink:0}
 .minfo{flex:1}
-.mname{font-weight:500;font-size:16px}
-.mstats{font-size:12px;color:var(--mu);margin-top:2px}
-.you-tag{font-size:11px;color:var(--ac2);background:rgba(124,111,247,.15);border-radius:6px;padding:1px 7px;margin-left:6px}
+.mname{font-weight:500;font-size:15px}
+.mstats{font-size:12px;color:var(--mu);margin-top:1px}
+.you-tag{font-size:11px;color:var(--ac2);background:rgba(124,111,247,.14);border-radius:5px;padding:1px 6px;margin-left:5px}
+.admin-tag{font-size:11px;color:var(--ac3);background:rgba(240,160,96,.14);border-radius:5px;padding:1px 6px;margin-left:5px}
+.share-box{background:var(--sf2);border-radius:var(--rs);padding:14px;margin:14px 16px 0}
+.code-big{font-family:'DM Serif Display',serif;font-size:32px;letter-spacing:6px;color:var(--ac);text-align:center;margin:6px 0}
 
-/* MODAL */
+/* ─── MODALS ─── */
 .mov{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s;backdrop-filter:blur(5px)}
 .mov.open{opacity:1;pointer-events:all}
-.modal{background:var(--sf);border-radius:24px 24px 0 0;width:100%;max-height:93vh;overflow-y:auto;padding:18px 20px 44px;transform:translateY(100%);transition:transform .28s cubic-bezier(.34,1.4,.64,1)}
+.modal{background:var(--sf);border-radius:24px 24px 0 0;width:100%;max-height:93vh;overflow-y:auto;padding:16px 20px 42px;transform:translateY(100%);transition:transform .28s cubic-bezier(.34,1.4,.64,1)}
 .mov.open .modal{transform:translateY(0)}
-.mhandle{width:36px;height:4px;background:var(--bd2);border-radius:2px;margin:0 auto 16px}
-.mtit{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:16px}
+.mhandle{width:36px;height:4px;background:var(--bd2);border-radius:2px;margin:0 auto 15px}
+.mtit{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:15px}
 
-/* SPLIT / CAT / PAYER */
-.split-row{display:flex;gap:8px;flex-wrap:wrap}
-.sc{padding:6px 13px;border-radius:20px;font-size:13px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;transition:all .15s;color:var(--mu)}
+/* split / payer / cat pickers */
+.split-row{display:flex;gap:7px;flex-wrap:wrap}
+.sc{padding:6px 12px;border-radius:20px;font-size:13px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;transition:all .14s;color:var(--mu)}
 .sc.active{background:var(--ac);color:#0a0a0f;border-color:var(--ac);font-weight:600}
-.pchip{padding:6px 12px 6px 8px;border-radius:20px;font-size:13px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s}
+.pchip{padding:5px 11px 5px 7px;border-radius:20px;font-size:13px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .14s}
 .pchip.active{border-color:var(--ac2);background:rgba(124,111,247,.15)}
-.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-top:7px}
-.cb{display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 3px;border-radius:10px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;font-size:19px;transition:all .15s}
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px}
+.cb{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 3px;border-radius:10px;border:1px solid var(--bd);background:var(--sf2);cursor:pointer;font-size:18px;transition:all .14s}
 .cb span{font-size:10px;color:var(--mu)}
 .cb.active{border-color:var(--ac);background:rgba(200,240,96,.1)}
-.pcheck{display:flex;flex-direction:column;gap:7px;margin-top:7px}
-.prow{display:flex;align-items:center;gap:10px;background:var(--sf2);border-radius:var(--rs);padding:10px 12px;cursor:pointer}
-.cbox{width:20px;height:20px;border-radius:6px;border:2px solid var(--bd);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.prow.chk .cbox{background:var(--ac);border-color:var(--ac);color:#0a0a0f;font-size:13px}
-.camt input{background:var(--bg);border:1px solid var(--bd);border-radius:6px;color:var(--tx);font-size:13px;padding:4px 8px;width:68px;text-align:right;font-family:'DM Sans',sans-serif;margin-left:auto}
+.pcheck{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+.prow{display:flex;align-items:center;gap:9px;background:var(--sf2);border-radius:var(--rs);padding:9px 11px;cursor:pointer}
+.cbox{width:20px;height:20px;border-radius:6px;border:2px solid var(--bd);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .14s;font-size:12px}
+.prow.chk .cbox{background:var(--ac);border-color:var(--ac);color:#0a0a0f}
+.camt input{background:var(--bg);border:1px solid var(--bd);border-radius:6px;color:var(--tx);font-size:13px;padding:4px 7px;width:65px;text-align:right;font-family:'DM Sans',sans-serif;margin-left:auto}
 
-/* RECEIPT */
-.rzone{border:2px dashed var(--bd2);border-radius:var(--rs);padding:20px;text-align:center;cursor:pointer;margin-bottom:12px;transition:border-color .2s}
+/* receipt scan */
+.rzone{border:2px dashed var(--bd2);border-radius:var(--rs);padding:18px;text-align:center;cursor:pointer;margin-bottom:11px;transition:border-color .18s}
 .rzone:active{border-color:var(--ac)}
-.rzone .ri{font-size:28px;margin-bottom:6px}
-.rzone p{font-size:13px;color:var(--mu)}
-.scan-ov{background:rgba(10,10,15,.88);border-radius:var(--rs);padding:20px;text-align:center;display:none;margin-bottom:12px}
-.spin{display:inline-block;width:26px;height:26px;border:3px solid var(--bd2);border-top-color:var(--ac);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:8px}
+.scan-ov{background:rgba(10,10,15,.9);border-radius:var(--rs);padding:18px;text-align:center;display:none;margin-bottom:11px}
+.spin{display:inline-block;width:24px;height:24px;border:3px solid var(--bd2);border-top-color:var(--ac);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:7px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* DETAIL */
-.drow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bd);font-size:14px}
+/* detail modal */
+.drow{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:14px}
 .drow:last-child{border:none}
 .drow .dl{color:var(--mu)}
 
-/* COMMENTS */
-.cmts{margin-top:16px;border-top:1px solid var(--bd);padding-top:14px}
-.citem{display:flex;gap:10px;margin-bottom:12px}
-.cav{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
-.cbody{flex:1;background:var(--sf2);border-radius:0 12px 12px 12px;padding:9px 11px}
+/* comments */
+.cmts{margin-top:14px;border-top:1px solid var(--bd);padding-top:13px}
+.citem{display:flex;gap:9px;margin-bottom:11px}
+.cav{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.cbody{flex:1;background:var(--sf2);border-radius:0 11px 11px 11px;padding:8px 10px}
 .cname{font-size:11px;font-weight:600;margin-bottom:2px}
-.ctxt{font-size:13px;line-height:1.45}
+.ctxt{font-size:13px;line-height:1.44}
 .ctime{font-size:10px;color:var(--mu);margin-top:3px}
-.cinp-row{display:flex;gap:8px;margin-top:10px;align-items:center}
-.cinp-row input{flex:1;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;color:var(--tx);font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 14px;outline:none}
+.cinp-row{display:flex;gap:7px;margin-top:9px;align-items:center}
+.cinp-row input{flex:1;background:var(--sf2);border:1px solid var(--bd);border-radius:20px;color:var(--tx);font-family:'DM Sans',sans-serif;font-size:14px;padding:8px 13px;outline:none}
 .cinp-row input:focus{border-color:var(--ac)}
-.send-btn{background:var(--ac);border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:16px;color:#0a0a0f;flex-shrink:0}
+.send-btn{background:var(--ac);border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;font-size:15px;color:#0a0a0f}
 
-/* SHARE */
-.share-box{background:var(--sf2);border-radius:var(--rs);padding:14px}
-.code-big{font-family:'DM Serif Display',serif;font-size:34px;letter-spacing:7px;color:var(--ac);text-align:center;margin:6px 0}
+/* settlement row */
+.srow{background:var(--sf);border:1px solid var(--bd);border-radius:var(--rs);padding:11px 13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.arrow{color:var(--ac);font-size:14px}
+.pill{background:var(--sf2);border-radius:20px;padding:3px 9px;font-size:12px}
+.sval{margin-left:auto;font-weight:600;color:var(--ac3);font-size:13px}
+.rec-btn{background:rgba(96,240,160,.12);color:var(--ok);border:1px solid rgba(96,240,160,.2);border-radius:7px;padding:4px 10px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif}
 
-/* MISC */
+/* misc */
 @keyframes su{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.empty{text-align:center;padding:52px 20px;color:var(--mu)}
-.empty .ei{font-size:44px;margin-bottom:10px}
-.empty h3{color:var(--tx);font-family:'DM Serif Display',serif;font-size:19px;margin-bottom:5px}
-#toast{position:fixed;top:56px;left:50%;transform:translateX(-50%) translateY(-16px);background:var(--sf);border:1px solid var(--bd2);border-radius:20px;padding:9px 18px;font-size:13px;z-index:200;opacity:0;transition:all .28s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.empty{text-align:center;padding:44px 20px;color:var(--mu)}
+.empty .ei{font-size:40px;margin-bottom:9px}
+.empty h3{color:var(--tx);font-family:'DM Serif Display',serif;font-size:18px;margin-bottom:4px}
+#toast{position:fixed;top:54px;left:50%;transform:translateX(-50%) translateY(-16px);background:var(--sf);border:1px solid var(--bd2);border-radius:20px;padding:9px 17px;font-size:13px;z-index:200;opacity:0;transition:all .27s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.4)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.mav-sm{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
-.frow{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;padding:10px 16px 0;scrollbar-width:none}
-.frow::-webkit-scrollbar{display:none}
+.mav-sm{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600}
+.divider{height:1px;background:var(--bd);margin:14px 0}
 </style>
 </head>
 <body>
@@ -207,7 +241,7 @@ textarea.fi{resize:none;height:72px}
   <span id="pend-lbl" style="color:var(--ac3);font-size:11px"></span>
 </div>
 
-<!-- ══ SETUP ══ -->
+<!-- ════════════════ SETUP SCREEN ════════════════ -->
 <div id="setup-screen" class="screen active" style="display:flex">
   <div style="width:100%;max-width:430px">
     <div class="logo">TripWise</div>
@@ -217,7 +251,6 @@ textarea.fi{resize:none;height:72px}
         <button class="tbtn active" id="tab-c" onclick="setupTab('c')">New Trip</button>
         <button class="tbtn" id="tab-j" onclick="setupTab('j')">Join Trip</button>
       </div>
-
       <!-- CREATE -->
       <div id="form-c">
         <div class="field"><label>Trip Name</label><input id="c-name" class="fi" type="text" placeholder="e.g. Bali 2026 🏝️" maxlength="40"></div>
@@ -233,16 +266,15 @@ textarea.fi{resize:none;height:72px}
           </select>
         </div>
         <div class="field">
-          <label>Add Other Members</label>
+          <label>Add Other Members (optional)</label>
           <div class="add-row">
             <input id="c-mem" class="fi" type="text" placeholder="Member name" maxlength="25" onkeydown="if(event.key==='Enter')addSM()">
-            <button class="btn bs" onclick="addSM()" style="width:auto;padding:11px 16px">Add</button>
+            <button class="btn bs" onclick="addSM()" style="width:auto;padding:11px 15px">Add</button>
           </div>
           <div class="mchips" id="sm-chips"></div>
         </div>
-        <button class="btn bp" onclick="createTrip()" style="margin-top:4px">Create Trip ✈️</button>
+        <button class="btn bp" onclick="createTrip()">Create Trip ✈️</button>
       </div>
-
       <!-- JOIN -->
       <div id="form-j" style="display:none">
         <div class="field"><label>Your Name</label><input id="j-me" class="fi" type="text" placeholder="Your name" maxlength="25"></div>
@@ -253,72 +285,143 @@ textarea.fi{resize:none;height:72px}
             oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')joinTrip()">
         </div>
         <button class="btn bp" onclick="joinTrip()">Join Trip 🚀</button>
-        <p style="margin-top:10px;font-size:12px;color:var(--mu);text-align:center">Get the code from whoever created the trip</p>
+        <p style="margin-top:9px;font-size:12px;color:var(--mu);text-align:center">Get the 6-letter code from the trip creator</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ EXPENSES ══ -->
-<div id="expenses-screen" class="screen">
-  <div class="shdr">
-    <h1 id="exp-tit">Expenses</h1>
-    <p id="exp-sub">—</p>
+<!-- ════════════════ DASHBOARD SCREEN ════════════════ -->
+<div id="dashboard-screen" class="screen">
+  <div class="shdr"><h1 id="dash-title">Dashboard</h1><p id="dash-sub">Trip overview</p></div>
+
+  <!-- hero stats -->
+  <div class="dash-hero" id="dash-hero">
+    <div class="dash-trip-name" id="dash-trip-name">—</div>
+    <div class="dash-meta" id="dash-meta">—</div>
+    <div class="dash-stats">
+      <div class="dstat"><div class="dstat-val" id="ds-total">—</div><div class="dstat-lbl">Total</div></div>
+      <div class="dstat"><div class="dstat-val" id="ds-count">—</div><div class="dstat-lbl">Expenses</div></div>
+      <div class="dstat"><div class="dstat-val" id="ds-unsettled">—</div><div class="dstat-lbl">Unsettled</div></div>
+    </div>
   </div>
+
+  <!-- Invite code strip -->
+  <div class="invite-strip">
+    <div>
+      <div class="ic-label">Trip Code</div>
+      <div class="ic-code" id="dash-code">———</div>
+    </div>
+    <button class="ic-copy" onclick="doShare()">📋 Copy Invite</button>
+  </div>
+
+  <!-- Category spend bars -->
+  <div class="section">
+    <div class="sec-tit">Spending by Category</div>
+    <div id="dash-cat-bars"></div>
+  </div>
+
+  <!-- Daily spend chart -->
+  <div class="chart-card">
+    <div class="chart-tit">Daily Spending</div>
+    <div class="chart-wrap"><canvas id="ch-day"></canvas></div>
+  </div>
+
+  <!-- Donut chart -->
+  <div class="chart-card">
+    <div class="chart-tit">Category Split</div>
+    <div class="chart-wrap donut"><canvas id="ch-donut"></canvas></div>
+  </div>
+
+  <!-- Per-person breakdown -->
+  <div class="section" style="margin-bottom:14px">
+    <div class="sec-tit">Spending per Person</div>
+    <div id="dash-person-rows"></div>
+  </div>
+
+  <!-- Settlements -->
+  <div class="section" style="margin-bottom:14px">
+    <div class="sec-tit">Who Pays Who</div>
+    <div id="dash-settlements"></div>
+  </div>
+</div>
+
+<!-- ════════════════ EXPENSES SCREEN ════════════════ -->
+<div id="expenses-screen" class="screen">
+  <div class="shdr"><h1 id="exp-tit">Expenses</h1><p id="exp-sub">—</p></div>
   <div class="frow" id="filter-row">
-    <button class="sc active" onclick="setF('all',this)">All</button>
-    <button class="sc" onclick="setF('mine',this)">Mine</button>
-    <button class="sc" onclick="setF('unsettled',this)">Unsettled</button>
-    <button class="sc" onclick="setF('settled',this)">Settled</button>
+    <button class="fc active" onclick="setF('all',this)">All</button>
+    <button class="fc" onclick="setF('mine',this)">Mine</button>
+    <button class="fc" onclick="setF('unsettled',this)">Unsettled</button>
+    <button class="fc" onclick="setF('settled',this)">Settled</button>
   </div>
   <div id="elist" class="elist"></div>
   <button class="fab" onclick="openAddExp()">+</button>
 </div>
 
-<!-- ══ SUMMARY ══ -->
-<div id="summary-screen" class="screen">
-  <div class="shdr"><h1>Summary</h1><p id="sum-sub">Balances & charts</p></div>
-  <div id="sum-body"></div>
+<!-- ════════════════ CATEGORIES SCREEN ════════════════ -->
+<div id="categories-screen" class="screen">
+  <div class="shdr"><h1>Categories</h1><p id="cat-sub">Manage expense categories</p></div>
+
+  <!-- admin only notice shown when not admin -->
+  <div class="locked-note" id="cat-locked" style="display:none">
+    🔒 Only the trip creator can modify categories. You can view them here.
+  </div>
+
+  <!-- Add form (admin only) -->
+  <div class="cat-add-form" id="cat-add-form">
+    <div style="font-size:13px;font-weight:500;margin-bottom:10px">Add New Category</div>
+    <div class="field"><label>Name</label><input id="new-cat-name" class="fi" type="text" placeholder="e.g. Spa" maxlength="20"></div>
+    <div class="field">
+      <label>Pick Emoji</label>
+      <div class="emoji-picker" id="emoji-picker"></div>
+    </div>
+    <button class="btn bp" onclick="addCategory()" style="margin-top:4px">Add Category</button>
+  </div>
+
+  <div class="section" style="margin-bottom:14px;margin-top:14px">
+    <div class="sec-tit">Current Categories</div>
+    <div id="cat-list"></div>
+  </div>
 </div>
 
-<!-- ══ MEMBERS ══ -->
+<!-- ════════════════ MEMBERS SCREEN ════════════════ -->
 <div id="members-screen" class="screen">
   <div class="shdr"><h1>Members</h1><p id="mem-sub">—</p></div>
   <div id="mem-list" class="mgrid"></div>
 
-  <div style="padding:0 16px 14px" id="invite-box" style="display:none">
-    <div class="sectit">Invite Friends</div>
+  <div id="invite-section" style="padding:0 16px;display:none">
+    <div class="sec-tit" style="margin-top:14px">Invite Friends</div>
     <div class="share-box">
-      <div style="font-size:12px;color:var(--mu)">Share this code</div>
+      <div style="font-size:12px;color:var(--mu)">Share this code — anyone can join</div>
       <div class="code-big" id="share-code">——</div>
-      <p style="font-size:11px;color:var(--mu);text-align:center;margin-bottom:10px">Anyone with this code can join the trip</p>
-      <button class="btn bs" onclick="doShare()">📋 Copy Invite Link</button>
+      <button class="btn bs" onclick="doShare()" style="margin-top:10px">📋 Copy Invite Link</button>
+    </div>
+    <div class="add-row" style="margin-top:14px">
+      <input id="nm-inp" class="fi" type="text" placeholder="Add member by name" maxlength="25" onkeydown="if(event.key==='Enter')addMemTrip()">
+      <button class="btn bs" onclick="addMemTrip()" style="width:auto;padding:11px 15px">Add</button>
     </div>
   </div>
 
-  <div style="padding:0 16px 12px" id="add-mem-box">
-    <div class="sectit">Add Member</div>
-    <div class="add-row">
-      <input id="nm-inp" class="fi" type="text" placeholder="Name" maxlength="25" onkeydown="if(event.key==='Enter')addMemTrip()">
-      <button class="btn bs" onclick="addMemTrip()" style="width:auto;padding:11px 16px">Add</button>
-    </div>
-  </div>
-
-  <div style="padding:0 16px 24px">
-    <button class="btn bd2" onclick="leaveTrip()">Leave Trip</button>
+  <div style="padding:14px 16px 24px;display:flex;flex-direction:column;gap:8px">
+    <button class="btn bdn" onclick="leaveTrip()">Leave Trip</button>
   </div>
 </div>
 
-<!-- ══ BOTTOM NAV ══ -->
+<!-- ════════════════ BOTTOM NAV ════════════════ -->
 <nav id="bnav" style="display:none">
-  <button class="nb active" id="nb-e" onclick="go('expenses')">
+  <button class="nb" id="nb-d" onclick="go('dashboard')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <span>Dashboard</span><div class="ndot"></div>
+  </button>
+  <button class="nb" id="nb-e" onclick="go('expenses')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
     <span>Expenses</span><div class="ndot"></div>
     <span class="nbadge" id="nb-badge">!</span>
   </button>
-  <button class="nb" id="nb-s" onclick="go('summary')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    <span>Summary</span><div class="ndot"></div>
+  <button class="nb" id="nb-c" onclick="go('categories')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h7"/><circle cx="17" cy="18" r="3"/><path d="m15.3 19.7 1-.9 1.7 1.7 3-3.5"/></svg>
+    <span>Categories</span><div class="ndot"></div>
   </button>
   <button class="nb" id="nb-m" onclick="go('members')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -327,22 +430,17 @@ textarea.fi{resize:none;height:72px}
 </nav>
 </div><!-- #app -->
 
-<!-- ══ ADD / EDIT EXPENSE MODAL ══ -->
+<!-- ════════ ADD / EDIT EXPENSE MODAL ════════ -->
 <div class="mov" id="exp-modal">
   <div class="modal">
     <div class="mhandle"></div>
     <div class="mtit" id="exp-mtit">Add Expense</div>
-
     <div class="rzone" id="rzone" onclick="document.getElementById('ri').click()">
-      <div class="ri">📸</div>
-      <p>Scan a receipt — AI auto-fills amount & name</p>
+      <div style="font-size:26px;margin-bottom:5px">📸</div>
+      <p style="font-size:13px;color:var(--mu)">Scan a receipt — AI auto-fills</p>
     </div>
     <input type="file" id="ri" accept="image/*" capture="environment" style="display:none" onchange="scanReceipt(this)">
-    <div class="scan-ov" id="scan-ov">
-      <div class="spin"></div>
-      <p style="font-size:13px;color:var(--mu)">Reading receipt…</p>
-    </div>
-
+    <div class="scan-ov" id="scan-ov"><div class="spin"></div><p style="font-size:13px;color:var(--mu)">Reading receipt…</p></div>
     <div class="field"><label>Description</label><input id="ed" class="fi" type="text" placeholder="What was it for?" maxlength="60"></div>
     <div class="field"><label>Amount</label><input id="ea" class="fi" type="number" inputmode="decimal" placeholder="0.00" min="0" step="0.01"></div>
     <div class="field"><label>Category</label><div class="cat-grid" id="cat-grid"></div></div>
@@ -364,7 +462,7 @@ textarea.fi{resize:none;height:72px}
   </div>
 </div>
 
-<!-- ══ DETAIL MODAL ══ -->
+<!-- ════════ EXPENSE DETAIL MODAL ════════ -->
 <div class="mov" id="det-modal">
   <div class="modal">
     <div class="mhandle"></div>
@@ -375,7 +473,7 @@ textarea.fi{resize:none;height:72px}
 
 <div id="toast"></div>
 
-<!-- ══════════ FIREBASE ══════════ -->
+<!-- ══════════════ FIREBASE ══════════════ -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
 import {
@@ -384,11 +482,10 @@ import {
   serverTimestamp, enableIndexedDbPersistence, query, orderBy
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-// ─────────────────────────────────────────────────────────
-// 🔧 REPLACE with your Firebase config
-// firebase.google.com → New Project → Firestore → Web App
-// ─────────────────────────────────────────────────────────
-
+// ──────────────────────────────────────────────────────────
+// 🔧 Replace with your Firebase config from firebase.google.com
+// New Project → Firestore Database → Web App → Config
+// ──────────────────────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyAaWcc6ouHZ6AQ-lzGkP_WQZQrrw50GlbE",
   authDomain: "tripwise-91008.firebaseapp.com",
@@ -401,7 +498,7 @@ const firebaseConfig = {
 
 let db = null, _subs = [];
 try {
-  const app = initializeApp(cfg);
+  const app = initializeApp(firebaseConfig);
   db = getFirestore(app);
   enableIndexedDbPersistence(db).catch(() => {});
   window._db = db; window._fbOk = true;
@@ -409,206 +506,354 @@ try {
 } catch(e) { window._fbOk = false; }
 
 window._startSync = (tid) => {
-  _subs.forEach(u => { try { u(); } catch(e) {} }); _subs = [];
+  _subs.forEach(u => { try{u();}catch(e){} }); _subs = [];
   if (!db) return;
-  _subs.push(onSnapshot(query(collection(db,'trips',tid,'expenses'), orderBy('createdAt','asc')), snap => {
+  _subs.push(onSnapshot(query(collection(db,'trips',tid,'expenses'),orderBy('createdAt','asc')), snap => {
     snap.docChanges().forEach(ch => {
-      const d = { ...ch.doc.data(), _fid: ch.doc.id };
-      if (ch.type === 'removed') window._onRemDel(ch.doc.id);
+      const d = {...ch.doc.data(), _fid: ch.doc.id};
+      if (ch.type==='removed') window._onRemDel(ch.doc.id);
       else window._onRemExp(d);
     });
-  }, () => {}));
+  }, ()=>{}));
   _subs.push(onSnapshot(doc(db,'trips',tid), snap => {
     if (snap.exists()) window._onRemMeta(snap.data());
-  }, () => {}));
+  }, ()=>{}));
 };
-
 window._pushExp = async (tid, exp) => {
   if (!db) return null;
   try {
-    const d = { ...exp };
-    if (d._fid) { await setDoc(doc(db,'trips',tid,'expenses',d._fid), d, { merge:true }); return d._fid; }
-    const r = await addDoc(collection(db,'trips',tid,'expenses'), { ...d, createdAt: serverTimestamp() });
+    if (exp._fid) { await setDoc(doc(db,'trips',tid,'expenses',exp._fid),exp,{merge:true}); return exp._fid; }
+    const r = await addDoc(collection(db,'trips',tid,'expenses'),{...exp,createdAt:serverTimestamp()});
     return r.id;
   } catch(e) { return null; }
 };
-window._delExp = async (tid, fid) => { if (db && fid) await deleteDoc(doc(db,'trips',tid,'expenses',fid)).catch(()=>{}); };
-window._pushMeta = async (tid, meta) => { if (db) await setDoc(doc(db,'trips',tid), { ...meta, updatedAt: serverTimestamp() }, { merge:true }).catch(()=>{}); };
-window._fetchMeta = async (tid) => { if (!db) return null; try { const s = await getDoc(doc(db,'trips',tid)); return s.exists() ? s.data() : null; } catch(e) { return null; } };
-window._updateExp = async (tid, fid, data) => { if (db && fid) await updateDoc(doc(db,'trips',tid,'expenses',fid), { ...data, updatedAt: serverTimestamp() }).catch(()=>{}); };
-window._pushComment = async (tid, fid, cmt) => {
-  if (!db) return null;
-  try { const r = await addDoc(collection(db,'trips',tid,'expenses',fid,'comments'), { ...cmt, createdAt: serverTimestamp() }); return r.id; } catch(e) { return null; }
+window._delExp    = async (tid,fid) => { if(db&&fid) await deleteDoc(doc(db,'trips',tid,'expenses',fid)).catch(()=>{}); };
+window._pushMeta  = async (tid,meta) => { if(db) await setDoc(doc(db,'trips',tid),{...meta,updatedAt:serverTimestamp()},{merge:true}).catch(()=>{}); };
+window._fetchMeta = async (tid) => { if(!db) return null; try{const s=await getDoc(doc(db,'trips',tid));return s.exists()?s.data():null;}catch(e){return null;} };
+window._updateExp = async (tid,fid,data) => { if(db&&fid) await updateDoc(doc(db,'trips',tid,'expenses',fid),{...data,updatedAt:serverTimestamp()}).catch(()=>{}); };
+window._pushComment = async (tid,fid,cmt) => {
+  if(!db) return null;
+  try{const r=await addDoc(collection(db,'trips',tid,'expenses',fid,'comments'),{...cmt,createdAt:serverTimestamp()});return r.id;}catch(e){return null;}
 };
-window._subComments = async (tid, fid, cb) => {
-  if (!db) return () => {};
-  return onSnapshot(query(collection(db,'trips',tid,'expenses',fid,'comments'), orderBy('createdAt','asc')), snap => {
-    cb(snap.docs.map(d => ({ ...d.data(), _fid: d.id })));
-  }, () => {});
+window._subComments = async (tid,fid,cb) => {
+  if(!db) return ()=>{};
+  return onSnapshot(query(collection(db,'trips',tid,'expenses',fid,'comments'),orderBy('createdAt','asc')), snap=>{
+    cb(snap.docs.map(d=>({...d.data(),_fid:d.id})));
+  },()=>{});
 };
 </script>
 
-<!-- ══════════ APP ══════════ -->
+<!-- ══════════════ APP LOGIC ══════════════ -->
 <script>
-// ── CONSTANTS ──────────────────────────────────────────────────────────────
+// ─── CONSTANTS ──────────────────────────────────────────────────────────────
 const COLORS = ['#c8f060','#7c6ff7','#f0a060','#60f0a0','#f06090','#60c8f0','#f0e060','#a060f0','#60f0c0','#f09060'];
-const CATS = [{e:'🍽️',l:'Food'},{e:'🚗',l:'Travel'},{e:'🏨',l:'Stay'},{e:'🎉',l:'Fun'},{e:'🛒',l:'Shop'},{e:'🍺',l:'Drinks'},{e:'🎟️',l:'Tickets'},{e:'💊',l:'Health'},{e:'✈️',l:'Flight'},{e:'📦',l:'Other'}];
-const SYMS = {USD:'$',EUR:'€',GBP:'£',INR:'₹',JPY:'¥',AUD:'A$',CAD:'C$',SGD:'S$',THB:'฿',IDR:'Rp'};
+const SYMS   = {USD:'$',EUR:'€',GBP:'£',INR:'₹',JPY:'¥',AUD:'A$',CAD:'C$',SGD:'S$',THB:'฿',IDR:'Rp'};
+const DEFAULT_CATS = [
+  {e:'🍽️',l:'Food'},{e:'🚗',l:'Travel'},{e:'🏨',l:'Stay'},
+  {e:'🎉',l:'Fun'},{e:'🛒',l:'Shop'},{e:'🍺',l:'Drinks'},
+  {e:'🎟️',l:'Tickets'},{e:'💊',l:'Health'},{e:'✈️',l:'Flight'},{e:'📦',l:'Other'}
+];
+const EMOJI_POOL = ['🍽️','🚗','🏨','🎉','🛒','🍺','🎟️','💊','✈️','📦','🏖️','🚢','🎭','🎪','🧴','🛵','🎿','🚁','🏕️','🎨','🎵','🧳','🍕','🍜','🍣','☕','🎯','🚤','⛺','🎢','🎠','🏄','🎲','🛍️','🧘','🏋️','🤿','🧗','🚵','🎸'];
+const EMOJI_SEL = {v: EMOJI_POOL[0]};
 
-// ── STATE ───────────────────────────────────────────────────────────────────
+// ─── STATE ───────────────────────────────────────────────────────────────────
 let S = {
   tripId: null, tripName: '', myName: '', currency: 'USD',
+  isAdmin: false,        // true if this user created the trip
   members: [], expenses: [], pending: [],
+  categories: [...DEFAULT_CATS],
   filter: 'all', editId: null, splitType: 'equal',
   setupMembers: [], online: false
 };
 
-// ── HELPERS ─────────────────────────────────────────────────────────────────
-const sym  = () => SYMS[S.currency] || S.currency;
-const fmt  = n  => sym() + parseFloat(n||0).toFixed(2);
-const uid  = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
-const col  = n  => { let h=0; for (let c of (n||'?')) h=(h*31+c.charCodeAt(0))%COLORS.length; return COLORS[h]; };
-const ini  = n  => (n||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-const save = () => { try { localStorage.setItem('tw3', JSON.stringify(S)); } catch(e){} };
-const load = () => { try { const r=localStorage.getItem('tw3'); if(r){Object.assign(S,JSON.parse(r));return true;} } catch(e){} return false; };
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+const sym   = () => SYMS[S.currency] || S.currency;
+const fmt   = n  => sym() + parseFloat(n||0).toFixed(2);
+const uid   = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+const col   = n  => { let h=0; for(let c of(n||'?')) h=(h*31+c.charCodeAt(0))%COLORS.length; return COLORS[h]; };
+const ini   = n  => (n||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+const save  = () => { try{localStorage.setItem('tw4',JSON.stringify(S));}catch(e){} };
+const load  = () => { try{const r=localStorage.getItem('tw4');if(r){Object.assign(S,JSON.parse(r));return true;}}catch(e){}return false; };
+const catOf = l  => S.categories.find(c=>c.l===l) || {e:'📦',l:'Other'};
 
-// ── SETUP TAB ────────────────────────────────────────────────────────────────
-function setupTab(t) {
-  document.getElementById('tab-c').classList.toggle('active', t==='c');
-  document.getElementById('tab-j').classList.toggle('active', t==='j');
-  document.getElementById('form-c').style.display = t==='c' ? '' : 'none';
-  document.getElementById('form-j').style.display = t==='j' ? '' : 'none';
+// ─── SETUP TAB ────────────────────────────────────────────────────────────────
+function setupTab(t){
+  document.getElementById('tab-c').classList.toggle('active',t==='c');
+  document.getElementById('tab-j').classList.toggle('active',t==='j');
+  document.getElementById('form-c').style.display = t==='c'?'':'none';
+  document.getElementById('form-j').style.display = t==='j'?'':'none';
 }
 
-// ── SETUP MEMBERS ────────────────────────────────────────────────────────────
-function addSM() {
-  const inp = document.getElementById('c-mem');
-  const n = inp.value.trim();
-  if (!n || S.setupMembers.includes(n)) { inp.focus(); return; }
-  S.setupMembers.push(n); inp.value = ''; renderSMChips(); inp.focus();
+// ─── SETUP MEMBERS ────────────────────────────────────────────────────────────
+function addSM(){
+  const i=document.getElementById('c-mem'), n=i.value.trim();
+  if(!n||S.setupMembers.includes(n)){i.focus();return;}
+  S.setupMembers.push(n); i.value=''; renderSMChips(); i.focus();
 }
-function removeSM(n) { S.setupMembers = S.setupMembers.filter(m=>m!==n); renderSMChips(); }
-function renderSMChips() {
-  document.getElementById('sm-chips').innerHTML = S.setupMembers.map(m =>
+function removeSM(n){ S.setupMembers=S.setupMembers.filter(m=>m!==n); renderSMChips(); }
+function renderSMChips(){
+  document.getElementById('sm-chips').innerHTML = S.setupMembers.map(m=>
     `<div class="mchip"><div class="mav-sm" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>${m}<button onclick="removeSM('${m}')">×</button></div>`
   ).join('');
 }
 
-// ── CREATE TRIP ───────────────────────────────────────────────────────────────
-async function createTrip() {
+// ─── CREATE TRIP ─────────────────────────────────────────────────────────────
+async function createTrip(){
   const name = document.getElementById('c-name').value.trim();
   const me   = document.getElementById('c-me').value.trim();
   const cur  = document.getElementById('c-cur').value;
-  if (!name) { toast('Enter a trip name'); return; }
-  if (!me)   { toast('Enter your name'); return; }
+  if(!name){ toast('Enter a trip name'); return; }
+  if(!me)  { toast('Enter your name');   return; }
 
   const code = Math.random().toString(36).slice(2,8).toUpperCase();
   const members = [me, ...S.setupMembers.filter(m=>m!==me)];
 
   S.tripId=code; S.tripName=name; S.myName=me; S.currency=cur;
-  S.members=members; S.expenses=[]; S.pending=[]; S.setupMembers=[];
+  S.isAdmin=true; S.members=members; S.expenses=[];
+  S.pending=[]; S.setupMembers=[];
+  S.categories=[...DEFAULT_CATS];
   save();
 
-  if (S.online && window._pushMeta) await window._pushMeta(code, { tripName:name, members, currency:cur, createdBy:me });
-  if (window._startSync) window._startSync(code);
+  if(S.online && window._pushMeta)
+    await window._pushMeta(code,{tripName:name,members,currency:cur,createdBy:me,categories:S.categories});
+  if(window._startSync) window._startSync(code);
   enterTrip();
-  toast('✅ Trip created! Code: ' + code);
+  toast('✅ Trip created! Code: '+code);
 }
 
-// ── JOIN TRIP ─────────────────────────────────────────────────────────────────
-async function joinTrip() {
+// ─── JOIN TRIP ────────────────────────────────────────────────────────────────
+async function joinTrip(){
   const me   = document.getElementById('j-me').value.trim();
   const code = document.getElementById('j-code').value.trim().toUpperCase();
-  if (!me)           { toast('Enter your name'); return; }
-  if (code.length!==6) { toast('Enter 6-letter code'); return; }
+  if(!me)          { toast('Enter your name');        return; }
+  if(code.length!==6){ toast('Enter 6-letter code'); return; }
+
+  // ── Prevent duplicate join ──
+  if(S.tripId===code && S.myName===me){
+    toast('⚠️ You are already in this trip!'); return;
+  }
 
   toast('🔍 Looking up trip…');
   const meta = window._fetchMeta ? await window._fetchMeta(code) : null;
-  if (!meta) { toast('❌ Trip not found — check code or go online'); return; }
+  if(!meta){ toast('❌ Trip not found — check code or go online'); return; }
 
-  const members = meta.members || [];
-  if (!members.includes(me)) members.push(me);
+  const members = meta.members||[];
+  if(!members.includes(me)) members.push(me);
 
   S.tripId=code; S.tripName=meta.tripName||code; S.myName=me;
   S.currency=meta.currency||'USD'; S.members=members;
+  S.isAdmin=(meta.createdBy===me);
+  S.categories=meta.categories||[...DEFAULT_CATS];
   S.expenses=[]; S.pending=[];
   save();
 
-  if (window._pushMeta) await window._pushMeta(code, { members });
-  if (window._startSync) window._startSync(code);
+  if(window._pushMeta) await window._pushMeta(code,{members});
+  if(window._startSync) window._startSync(code);
   enterTrip();
-  toast('✅ Joined ' + S.tripName);
+  toast('✅ Joined '+S.tripName);
 }
 
-// ── ENTER TRIP ────────────────────────────────────────────────────────────────
-function enterTrip() {
+// ─── ENTER TRIP ───────────────────────────────────────────────────────────────
+function enterTrip(){
   document.getElementById('trip-hdr').textContent = S.tripName;
   document.getElementById('bnav').style.display = 'flex';
-  document.getElementById('invite-box').style.display = '';
   document.getElementById('share-code').textContent = S.tripId;
-  go('expenses');
-  renderExp();
+  document.getElementById('invite-section').style.display = '';
+  document.getElementById('dash-code').textContent = S.tripId;
+  go('dashboard');
   updateBadge();
 }
 
-function leaveTrip() {
-  if (!confirm('Leave this trip? Your local data will be cleared.')) return;
-  S = { tripId:null,tripName:'',myName:'',currency:'USD',members:[],expenses:[],pending:[],filter:'all',editId:null,splitType:'equal',setupMembers:[],online:false };
-  localStorage.removeItem('tw3');
-  document.getElementById('bnav').style.display = 'none';
-  document.getElementById('trip-hdr').textContent = 'TripWise';
+function leaveTrip(){
+  if(!confirm('Leave this trip? Your local data will be cleared.')) return;
+  S={tripId:null,tripName:'',myName:'',currency:'USD',isAdmin:false,members:[],expenses:[],pending:[],categories:[...DEFAULT_CATS],filter:'all',editId:null,splitType:'equal',setupMembers:[],online:false};
+  localStorage.removeItem('tw4');
+  document.getElementById('bnav').style.display='none';
+  document.getElementById('trip-hdr').textContent='TripWise';
   showScr('setup');
 }
 
-// ── NAVIGATION ────────────────────────────────────────────────────────────────
-function showScr(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
+function showScr(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id+'-screen').classList.add('active');
 }
-function go(id) {
+function go(id){
   showScr(id);
-  document.querySelectorAll('.nb').forEach(b => b.classList.remove('active'));
-  const map = {expenses:'nb-e', summary:'nb-s', members:'nb-m'};
-  if (map[id]) document.getElementById(map[id]).classList.add('active');
-  if (id==='summary') renderSummary();
-  if (id==='members') renderMembers();
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  const map={dashboard:'nb-d',expenses:'nb-e',categories:'nb-c',members:'nb-m'};
+  if(map[id]) document.getElementById(map[id]).classList.add('active');
+  if(id==='dashboard')  renderDashboard();
+  if(id==='expenses')   renderExp();
+  if(id==='categories') renderCategories();
+  if(id==='members')    renderMembers();
 }
 
-// ── FILTER ────────────────────────────────────────────────────────────────────
-function setF(f, el) {
-  S.filter = f;
-  document.querySelectorAll('#filter-row .sc').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  renderExp();
-}
+// ═══════════════════════════════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════════════════════════════
+let _dCharts = [];
+function renderDashboard(){
+  const exps    = S.expenses;
+  const members = S.members;
+  const total   = exps.reduce((a,e)=>a+parseFloat(e.amount||0),0);
+  const unsettled = exps.filter(e=>!e.settled).length;
 
-// ── RENDER EXPENSES ───────────────────────────────────────────────────────────
-function renderExp() {
-  const exps = S.expenses;
-  document.getElementById('exp-tit').textContent = S.tripName || 'Expenses';
-  const total = exps.reduce((a,e) => a+parseFloat(e.amount||0), 0);
-  document.getElementById('exp-sub').textContent = `${exps.length} expenses · ${fmt(total)}`;
+  document.getElementById('dash-trip-name').textContent = S.tripName;
+  document.getElementById('dash-meta').textContent = `${members.length} members · ${S.currency} · Code: ${S.tripId}`;
+  document.getElementById('ds-total').textContent   = fmt(total);
+  document.getElementById('ds-count').textContent   = exps.length;
+  document.getElementById('ds-unsettled').textContent = unsettled;
+  document.getElementById('dash-code').textContent  = S.tripId;
 
-  let show = [...exps];
-  if (S.filter==='mine')      show = show.filter(e => e.paidBy===S.myName);
-  if (S.filter==='settled')   show = show.filter(e => e.settled);
-  if (S.filter==='unsettled') show = show.filter(e => !e.settled);
-  show.sort((a,b) => new Date(b.date||0)-new Date(a.date||0));
+  // ── Category bars ──
+  const byCat = {};
+  exps.forEach(e => { const c=e.category||'Other'; byCat[c]=(byCat[c]||0)+parseFloat(e.amount||0); });
+  const catArr = Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
+  const catPal = ['#c8f060','#7c6ff7','#f0a060','#60f0a0','#f06090','#60c8f0','#f0e060','#a060f0'];
 
-  const el = document.getElementById('elist');
-  if (!show.length) {
-    el.innerHTML = '<div class="empty"><div class="ei">🧾</div><h3>Nothing here</h3><p>Tap + to add an expense</p></div>';
-    return;
+  document.getElementById('dash-cat-bars').innerHTML = catArr.length ? catArr.map(([cat,amt],i)=>{
+    const pct = total ? (amt/total*100) : 0;
+    const c   = catOf(cat);
+    const clr = catPal[i%catPal.length];
+    return `<div class="cat-bar-row">
+      <div class="cat-bar-icon">${c.e}</div>
+      <div class="cat-bar-info">
+        <div class="cat-bar-top">
+          <span class="cat-bar-name">${cat}</span>
+          <span class="cat-bar-amt" style="color:${clr}">${fmt(amt)}</span>
+        </div>
+        <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct.toFixed(1)}%;background:${clr}"></div></div>
+        <div class="cat-bar-pct">${pct.toFixed(1)}% of total</div>
+      </div>
+    </div>`;
+  }).join('') : '<p style="font-size:13px;color:var(--mu);padding:4px 0">No expenses yet</p>';
+
+  // ── Per-person breakdown + balances ──
+  const paid={}, owed={};
+  members.forEach(m=>{paid[m]=0;owed[m]=0;});
+  exps.forEach(e=>{
+    const amt=parseFloat(e.amount||0);
+    paid[e.paidBy]=(paid[e.paidBy]||0)+amt;
+    if(e.splitType==='solo') return;
+    const parts=e.participants||members;
+    if((e.splitType==='custom'||e.splitType==='pct')&&e.customSplits){
+      parts.forEach(p=>{owed[p]=(owed[p]||0)+parseFloat(e.customSplits[p]||0);});
+    } else {
+      const share=amt/parts.length;
+      parts.forEach(p=>{owed[p]=(owed[p]||0)+share;});
+    }
+  });
+  const bal={};
+  members.forEach(m=>{bal[m]=(paid[m]||0)-(owed[m]||0);});
+
+  document.getElementById('dash-person-rows').innerHTML = members.length ? members.map(m=>{
+    const b=bal[m]||0;
+    return `<div class="person-row">
+      <div class="pav" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>
+      <div class="person-info">
+        <div class="person-name">${m}${m===S.myName?' <span style="font-size:11px;color:var(--mu)">(you)</span>':''}</div>
+        <div class="person-sub">Paid ${fmt(paid[m]||0)} · ${exps.filter(e=>e.paidBy===m).length} expenses</div>
+      </div>
+      <div class="person-right">
+        <div class="person-amt">${fmt(paid[m]||0)}</div>
+        <div class="person-bal ${b>=0?'pos':'neg'}">${b>=0?'gets back':'owes'} ${fmt(Math.abs(b))}</div>
+      </div>
+    </div>`;
+  }).join('') : '<p style="font-size:13px;color:var(--mu)">No members yet</p>';
+
+  // ── Settlements ──
+  const settlements = computeSettle(bal);
+  document.getElementById('dash-settlements').innerHTML = settlements.length ? settlements.map(s=>
+    `<div class="srow">
+      <span class="pill">${s.from}</span><span class="arrow">→</span><span class="pill">${s.to}</span>
+      <span class="sval">${fmt(s.amount)}</span>
+      <button class="rec-btn" onclick="recordSettlement('${s.from}','${s.to}',${s.amount.toFixed(2)})">Record ✓</button>
+    </div>`
+  ).join('') : '<p style="font-size:13px;color:var(--ok)">🎉 All settled up!</p>';
+
+  // ── Charts ──
+  _dCharts.forEach(c=>{try{c.destroy();}catch(e){}});_dCharts=[];
+  const gc='rgba(255,255,255,0.05)',tc='rgba(240,240,245,0.42)';
+  const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+    scales:{x:{grid:{color:gc},ticks:{color:tc,font:{size:11}}},y:{grid:{color:gc},ticks:{color:tc,font:{size:11}}}}};
+
+  // Daily
+  const byDate={};
+  exps.forEach(e=>{if(e.date) byDate[e.date]=(byDate[e.date]||0)+parseFloat(e.amount||0);});
+  const dateArr=Object.entries(byDate).sort((a,b)=>a[0]>b[0]?1:-1).slice(-14);
+  if(dateArr.length){
+    _dCharts.push(new Chart(document.getElementById('ch-day'),{
+      type:'bar',
+      data:{labels:dateArr.map(([d])=>d.slice(5)),datasets:[{data:dateArr.map(([,v])=>+v.toFixed(2)),backgroundColor:'#c8f06077',borderColor:'#c8f060',borderWidth:1.5,borderRadius:5}]},
+      options:baseOpts
+    }));
   }
-  const pend = S.pending;
-  el.innerHTML = show.map(e => {
-    const cat = CATS.find(c=>c.l===e.category)||CATS[9];
-    const pp  = e.splitType==='solo' ? '' : fmt(e.amount/Math.max((e.participants||[]).length,1));
-    const pr  = pend.includes(e.id) ? '🔄 ' : '';
+
+  // Donut
+  if(catArr.length){
+    _dCharts.push(new Chart(document.getElementById('ch-donut'),{
+      type:'doughnut',
+      data:{labels:catArr.map(([c])=>c),datasets:[{data:catArr.map(([,v])=>+v.toFixed(2)),backgroundColor:catPal.slice(0,catArr.length),borderWidth:0,hoverOffset:5}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'right',labels:{color:tc,font:{size:11},boxWidth:10}}}}
+    }));
+  }
+}
+
+function computeSettle(bal){
+  const cr=[],de=[];
+  Object.entries(bal).forEach(([n,b])=>{if(b>0.005)cr.push({n,a:b});else if(b<-0.005)de.push({n,a:-b});});
+  cr.sort((a,b)=>b.a-a.a);de.sort((a,b)=>b.a-a.a);
+  const out=[];let i=0,j=0;
+  while(i<de.length&&j<cr.length){
+    const a=Math.min(de[i].a,cr[j].a);
+    out.push({from:de[i].n,to:cr[j].n,amount:a});
+    de[i].a-=a;cr[j].a-=a;
+    if(de[i].a<0.005)i++;if(cr[j].a<0.005)j++;
+  }
+  return out;
+}
+
+async function recordSettlement(from,to,amount){
+  const exp={
+    id:uid(),description:`${from} → ${to} (settlement)`,amount,
+    category:'Other',paidBy:from,splitType:'custom',
+    participants:[to],customSplits:{[to]:amount},
+    date:new Date().toISOString().split('T')[0],
+    notes:'Settlement payment',addedBy:S.myName,settled:true,_isSettlement:true,comments:[]
+  };
+  S.expenses.push(exp); save(); renderDashboard();
+  toast('✅ Settlement recorded');
+  if(S.online&&window._pushExp){const fid=await window._pushExp(S.tripId,exp);if(fid)exp._fid=fid;save();}
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// EXPENSES
+// ═══════════════════════════════════════════════════════════════════
+function renderExp(){
+  const exps=S.expenses;
+  document.getElementById('exp-tit').textContent=S.tripName||'Expenses';
+  const total=exps.reduce((a,e)=>a+parseFloat(e.amount||0),0);
+  document.getElementById('exp-sub').textContent=`${exps.length} expenses · ${fmt(total)}`;
+
+  let show=[...exps];
+  if(S.filter==='mine')      show=show.filter(e=>e.paidBy===S.myName);
+  if(S.filter==='settled')   show=show.filter(e=>e.settled);
+  if(S.filter==='unsettled') show=show.filter(e=>!e.settled);
+  show.sort((a,b)=>new Date(b.date||0)-new Date(a.date||0));
+
+  const el=document.getElementById('elist');
+  if(!show.length){
+    el.innerHTML='<div class="empty"><div class="ei">🧾</div><h3>Nothing here</h3><p>Tap + to add an expense</p></div>';return;
+  }
+  const pend=S.pending;
+  el.innerHTML=show.map(e=>{
+    const c=catOf(e.category);
+    const pp=e.splitType==='solo'?'':fmt(e.amount/Math.max((e.participants||[]).length,1));
     return `<div class="ecard${e.settled?' settled-card':''}" onclick="showDet('${e.id}')">
-      <div class="eicon" style="background:${col(e.category||'Other')}22">${cat.e}</div>
+      <div class="eicon" style="background:${col(e.category||'Other')}22">${c.e}</div>
       <div class="einfo">
-        <div class="etitle">${pr}${e.description}${e.settled?'<span class="sbadge">settled</span>':''}</div>
+        <div class="etit">${pend.includes(e.id)?'🔄 ':''}${e.description}${e.settled?'<span class="sbadge">settled</span>':''}</div>
         <div class="emeta">${e.paidBy} · ${e.date||''}${e.splitType==='solo'?' · Solo':''}</div>
       </div>
       <div class="eamt"><div class="tot">${fmt(e.amount)}</div><div class="per">${pp?pp+'/ea':''}</div></div>
@@ -616,154 +861,132 @@ function renderExp() {
   }).join('');
 }
 
-// ── ADD / EDIT EXPENSE ────────────────────────────────────────────────────────
-function openAddExp(editId=null) {
-  S.editId = editId; S.splitType = 'equal';
-  document.getElementById('edate').value = new Date().toISOString().split('T')[0];
-  document.getElementById('rzone').style.display = '';
-  document.getElementById('scan-ov').style.display = 'none';
+function setF(f,el){
+  S.filter=f;
+  document.querySelectorAll('#filter-row .fc').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); renderExp();
+}
 
-  // Categories
-  document.getElementById('cat-grid').innerHTML = CATS.map((c,i) =>
+// ─── ADD/EDIT EXPENSE ─────────────────────────────────────────────────────────
+function openAddExp(editId=null){
+  S.editId=editId; S.splitType='equal';
+  document.getElementById('edate').value=new Date().toISOString().split('T')[0];
+  document.getElementById('rzone').style.display='';
+  document.getElementById('scan-ov').style.display='none';
+
+  document.getElementById('cat-grid').innerHTML=S.categories.map((c,i)=>
     `<div class="cb${i===0?' active':''}" onclick="selCat(this,'${c.l}')" data-cat="${c.l}">${c.e}<span>${c.l}</span></div>`
   ).join('');
 
-  // Payers
-  document.getElementById('payer-row').innerHTML = S.members.map(m =>
+  document.getElementById('payer-row').innerHTML=S.members.map(m=>
     `<div class="pchip${m===S.myName?' active':''}" onclick="selPayer(this,'${m}')" data-p="${m}">
       <div class="mav-sm" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>${m}
     </div>`
   ).join('');
 
   renderParts(S.members);
-  document.querySelectorAll('#split-row .sc').forEach((b,i) => b.classList.toggle('active', i===0));
+  document.querySelectorAll('#split-row .sc').forEach((b,i)=>b.classList.toggle('active',i===0));
 
-  if (editId) {
-    const e = S.expenses.find(x=>x.id===editId);
-    if (e) {
-      document.getElementById('exp-mtit').textContent = 'Edit Expense';
-      document.getElementById('ed').value = e.description;
-      document.getElementById('ea').value = e.amount;
-      document.getElementById('edate').value = e.date;
-      document.getElementById('enotes').value = e.notes||'';
-      document.querySelectorAll('.cb').forEach(b => b.classList.toggle('active', b.dataset.cat===e.category));
-      document.querySelectorAll('.pchip').forEach(b => b.classList.toggle('active', b.dataset.p===e.paidBy));
-      S.splitType = e.splitType||'equal';
-      const sMap = {equal:'Equal',pct:'%',custom:'Custom',solo:'Solo'};
-      document.querySelectorAll('#split-row .sc').forEach(b => b.classList.toggle('active', b.textContent.trim()===sMap[S.splitType]));
-      renderParts(e.participants||S.members, e.customSplits);
-      document.getElementById('parts-f').style.display = S.splitType==='solo' ? 'none' : '';
+  if(editId){
+    const e=S.expenses.find(x=>x.id===editId);
+    if(e){
+      document.getElementById('exp-mtit').textContent='Edit Expense';
+      document.getElementById('ed').value=e.description;
+      document.getElementById('ea').value=e.amount;
+      document.getElementById('edate').value=e.date;
+      document.getElementById('enotes').value=e.notes||'';
+      document.querySelectorAll('.cb').forEach(b=>b.classList.toggle('active',b.dataset.cat===e.category));
+      document.querySelectorAll('.pchip').forEach(b=>b.classList.toggle('active',b.dataset.p===e.paidBy));
+      S.splitType=e.splitType||'equal';
+      const sMap={equal:'Equal',pct:'%',custom:'Custom',solo:'Solo'};
+      document.querySelectorAll('#split-row .sc').forEach(b=>b.classList.toggle('active',b.textContent.trim()===sMap[S.splitType]));
+      renderParts(e.participants||S.members,e.customSplits);
+      document.getElementById('parts-f').style.display=S.splitType==='solo'?'none':'';
     }
   } else {
-    document.getElementById('exp-mtit').textContent = 'Add Expense';
-    document.getElementById('ed').value = '';
-    document.getElementById('ea').value = '';
-    document.getElementById('enotes').value = '';
+    document.getElementById('exp-mtit').textContent='Add Expense';
+    ['ed','ea','enotes'].forEach(id=>document.getElementById(id).value='');
   }
   openM('exp-modal');
-  setTimeout(() => document.getElementById('ed').focus(), 340);
+  setTimeout(()=>document.getElementById('ed').focus(),340);
 }
 
-function selCat(el) { document.querySelectorAll('.cb').forEach(b=>b.classList.remove('active')); el.classList.add('active'); }
-function selPayer(el) { document.querySelectorAll('.pchip').forEach(b=>b.classList.remove('active')); el.classList.add('active'); }
-function setSplit(t, el) {
-  S.splitType = t;
-  document.querySelectorAll('#split-row .sc').forEach(b=>b.classList.remove('active')); el.classList.add('active');
-  document.getElementById('parts-f').style.display = t==='solo' ? 'none' : '';
-  if (t!=='solo') renderParts(S.members);
+function selCat(el){document.querySelectorAll('.cb').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
+function selPayer(el){document.querySelectorAll('.pchip').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
+function setSplit(t,el){
+  S.splitType=t;
+  document.querySelectorAll('#split-row .sc').forEach(b=>b.classList.remove('active'));el.classList.add('active');
+  document.getElementById('parts-f').style.display=t==='solo'?'none':'';
+  if(t!=='solo') renderParts(S.members);
 }
-function renderParts(sel=S.members, custom={}) {
-  const showInp = S.splitType==='custom'||S.splitType==='pct';
-  document.getElementById('parts-list').innerHTML = S.members.map(m => `
+function renderParts(sel=S.members,custom={}){
+  const showInp=S.splitType==='custom'||S.splitType==='pct';
+  document.getElementById('parts-list').innerHTML=S.members.map(m=>`
     <div class="prow${sel.includes(m)?' chk':''}" onclick="togP(this)">
       <div class="cbox">${sel.includes(m)?'✓':''}</div>
       <div class="mav-sm" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>
       <span>${m}</span>
-      ${showInp ? `<input type="number" min="0" step="0.01" placeholder="${S.splitType==='pct'?'%':'amt'}" value="${custom[m]||''}" data-m="${m}" onclick="event.stopPropagation()" class="camt">` : ''}
-    </div>`).join('');
+      ${showInp?`<input type="number" min="0" step="0.01" placeholder="${S.splitType==='pct'?'%':'amt'}" value="${custom[m]||''}" data-m="${m}" onclick="event.stopPropagation()" class="camt">`:''}`
+  +`</div>`).join('');
 }
-function togP(el) { el.classList.toggle('chk'); el.querySelector('.cbox').textContent = el.classList.contains('chk') ? '✓' : ''; }
-const getSelParts = () => [...document.querySelectorAll('.prow.chk')].map(el => el.querySelector('span').textContent).filter(Boolean);
-const getCustom  = () => { const r={}; document.querySelectorAll('.camt').forEach(i => { if(i.value) r[i.dataset.m]=parseFloat(i.value); }); return r; };
-const getSelCat  = () => (document.querySelector('.cb.active')||{}).dataset?.cat || 'Other';
-const getSelPayer= () => (document.querySelector('.pchip.active')||{}).dataset?.p || S.myName;
+function togP(el){el.classList.toggle('chk');el.querySelector('.cbox').textContent=el.classList.contains('chk')?'✓':'';}
+const getSelParts =()=>[...document.querySelectorAll('.prow.chk')].map(el=>el.querySelector('span').textContent).filter(Boolean);
+const getCustom   =()=>{const r={};document.querySelectorAll('.camt').forEach(i=>{if(i.value)r[i.dataset.m]=parseFloat(i.value);});return r;};
+const getSelCat   =()=>(document.querySelector('.cb.active')||{}).dataset?.cat||'Other';
+const getSelPayer =()=>(document.querySelector('.pchip.active')||{}).dataset?.p||S.myName;
 
-async function saveExp() {
-  const desc   = document.getElementById('ed').value.trim();
-  const amount = parseFloat(document.getElementById('ea').value);
-  const date   = document.getElementById('edate').value;
-  const notes  = document.getElementById('enotes').value.trim();
-  if (!desc)           { toast('Add a description'); return; }
-  if (!amount||amount<=0) { toast('Enter a valid amount'); return; }
-  const parts = getSelParts();
-  if (S.splitType!=='solo' && !parts.length) { toast('Select at least one participant'); return; }
+async function saveExp(){
+  const desc=document.getElementById('ed').value.trim();
+  const amount=parseFloat(document.getElementById('ea').value);
+  const date=document.getElementById('edate').value;
+  const notes=document.getElementById('enotes').value.trim();
+  if(!desc){toast('Add a description');return;}
+  if(!amount||amount<=0){toast('Enter a valid amount');return;}
+  const parts=getSelParts();
+  if(S.splitType!=='solo'&&!parts.length){toast('Select at least one participant');return;}
 
-  const exp = {
-    id: S.editId || uid(),
-    description: desc, amount, date, notes,
-    category:    getSelCat(),
-    paidBy:      getSelPayer(),
-    splitType:   S.splitType,
-    participants: parts,
-    customSplits: (S.splitType==='custom'||S.splitType==='pct') ? getCustom() : {},
-    addedBy: S.myName, settled: false, comments: []
+  const exp={
+    id:S.editId||uid(),description:desc,amount,date,notes,
+    category:getSelCat(),paidBy:getSelPayer(),splitType:S.splitType,
+    participants:parts,customSplits:(S.splitType==='custom'||S.splitType==='pct')?getCustom():{},
+    addedBy:S.myName,settled:false,comments:[]
   };
+  if(S.editId){
+    const idx=S.expenses.findIndex(e=>e.id===S.editId);
+    if(idx!==-1){exp.settled=S.expenses[idx].settled;exp._fid=S.expenses[idx]._fid;S.expenses[idx]=exp;}
+  } else S.expenses.push(exp);
 
-  if (S.editId) {
-    const idx = S.expenses.findIndex(e=>e.id===S.editId);
-    if (idx!==-1) { exp.settled=S.expenses[idx].settled; exp._fid=S.expenses[idx]._fid; S.expenses[idx]=exp; }
-  } else {
-    S.expenses.push(exp);
-  }
-  if (!S.pending.includes(exp.id)) S.pending.push(exp.id);
+  if(!S.pending.includes(exp.id)) S.pending.push(exp.id);
   save(); renderExp(); closeM('exp-modal'); toast('✅ Saved');
 
-  if (S.online && window._pushExp) {
-    const fid = await window._pushExp(S.tripId, exp);
-    if (fid) exp._fid = fid;
-    S.pending = S.pending.filter(x=>x!==exp.id);
+  if(S.online&&window._pushExp){
+    const fid=await window._pushExp(S.tripId,exp);
+    if(fid) exp._fid=fid;
+    S.pending=S.pending.filter(x=>x!==exp.id);
     save(); updateBadge();
   } else updateBadge();
 }
 
-// ── MARK SETTLED ─────────────────────────────────────────────────────────────
-async function markSettled(id) {
-  const exp = S.expenses.find(e=>e.id===id);
-  if (!exp) return;
-  exp.settled = !exp.settled;
-  save(); renderExp(); closeM('det-modal');
-  toast(exp.settled ? '✅ Marked as settled' : '↩️ Unmarked');
-  if (S.online && exp._fid && window._updateExp) await window._updateExp(S.tripId, exp._fid, { settled: exp.settled });
+// ─── MARK SETTLED ─────────────────────────────────────────────────────────────
+async function markSettled(id){
+  const exp=S.expenses.find(e=>e.id===id);
+  if(!exp) return;
+  exp.settled=!exp.settled; save(); renderExp(); closeM('det-modal');
+  toast(exp.settled?'✅ Marked settled':'↩️ Unmarked');
+  if(S.online&&exp._fid&&window._updateExp) await window._updateExp(S.tripId,exp._fid,{settled:exp.settled});
 }
 
-// ── RECORD SETTLEMENT ─────────────────────────────────────────────────────────
-async function recordSettlement(from, to, amount) {
-  const exp = {
-    id: uid(), description: `${from} → ${to} (settlement)`, amount,
-    category: 'Other', paidBy: from, splitType: 'custom',
-    participants: [to], customSplits: {[to]: amount},
-    date: new Date().toISOString().split('T')[0],
-    notes: 'Settlement payment', addedBy: S.myName, settled: true,
-    _isSettlement: true, comments: []
-  };
-  S.expenses.push(exp); save(); renderExp();
-  if (document.getElementById('summary-screen').classList.contains('active')) renderSummary();
-  toast('✅ Settlement recorded');
-  if (S.online && window._pushExp) { const fid=await window._pushExp(S.tripId,exp); if(fid) exp._fid=fid; save(); }
-}
-
-// ── EXPENSE DETAIL ────────────────────────────────────────────────────────────
-let _cmtUnsub = null;
-function showDet(id) {
-  const e = S.expenses.find(x=>x.id===id);
-  if (!e) return;
-  const cat = CATS.find(c=>c.l===e.category)||CATS[9];
-  const pp  = e.splitType==='solo' ? 'No split' : fmt(e.amount/Math.max((e.participants||[]).length,1))+'/person';
-  document.getElementById('det-body').innerHTML = `
-    <div style="text-align:center;margin-bottom:16px">
-      <div style="font-size:40px">${cat.e}</div>
-      <div style="font-family:'DM Serif Display',serif;font-size:22px;margin-top:4px">${e.description}${e.settled?'<span class="sbadge" style="font-size:13px">settled</span>':''}</div>
-      <div style="font-size:30px;font-weight:600;margin-top:2px">${fmt(e.amount)}</div>
+// ─── EXPENSE DETAIL ───────────────────────────────────────────────────────────
+let _cmtUnsub=null;
+function showDet(id){
+  const e=S.expenses.find(x=>x.id===id); if(!e) return;
+  const c=catOf(e.category);
+  const pp=e.splitType==='solo'?'No split':fmt(e.amount/Math.max((e.participants||[]).length,1))+'/person';
+  document.getElementById('det-body').innerHTML=`
+    <div style="text-align:center;margin-bottom:14px">
+      <div style="font-size:38px">${c.e}</div>
+      <div style="font-family:'DM Serif Display',serif;font-size:21px;margin-top:3px">${e.description}${e.settled?'<span class="sbadge" style="font-size:12px">settled</span>':''}</div>
+      <div style="font-size:28px;font-weight:600;margin-top:2px">${fmt(e.amount)}</div>
     </div>
     <div class="drow"><span class="dl">Paid by</span><span>${e.paidBy}</span></div>
     <div class="drow"><span class="dl">Category</span><span>${e.category}</span></div>
@@ -772,394 +995,287 @@ function showDet(id) {
     ${e.splitType!=='solo'?`<div class="drow"><span class="dl">Per person</span><span>${pp}</span></div>`:''}
     ${(e.participants||[]).length?`<div class="drow"><span class="dl">Among</span><span>${e.participants.join(', ')}</span></div>`:''}
     ${e.notes?`<div class="drow"><span class="dl">Notes</span><span>${e.notes}</span></div>`:''}
-    <div style="display:flex;gap:8px;margin-top:14px">
+    <div style="display:flex;gap:8px;margin-top:13px">
       <button class="btn bs" style="flex:1" onclick="closeM('det-modal');openAddExp('${id}')">✏️ Edit</button>
       <button class="btn ${e.settled?'bs':'bg'}" style="flex:1" onclick="markSettled('${id}')">${e.settled?'↩️ Unsettle':'✅ Settle'}</button>
     </div>
-    <button class="btn bd2" onclick="delExp('${id}')" style="margin-top:8px">🗑️ Delete</button>
+    <button class="btn bdn" onclick="delExp('${id}')" style="margin-top:8px">🗑️ Delete</button>
     <div class="cmts">
-      <div style="font-size:13px;font-weight:500;margin-bottom:10px">💬 Comments</div>
+      <div style="font-size:13px;font-weight:500;margin-bottom:9px">💬 Comments</div>
       <div id="cmt-list"></div>
       <div class="cinp-row">
         <input id="cmt-inp" type="text" placeholder="Write a comment…" onkeydown="if(event.key==='Enter')postCmt('${id}')">
         <button class="send-btn" onclick="postCmt('${id}')">↑</button>
       </div>
-    </div>
-  `;
-  loadCmts(id);
-  openM('det-modal');
+    </div>`;
+  loadCmts(id); openM('det-modal');
 }
-
-function loadCmts(expId) {
-  if (_cmtUnsub) { try { _cmtUnsub(); } catch(e){} _cmtUnsub=null; }
-  const exp = S.expenses.find(e=>e.id===expId);
-  renderCmts(exp?.comments||[], expId);
-  if (S.online && exp?._fid && window._subComments) {
-    window._subComments(S.tripId, exp._fid, cmts => {
-      if (exp) { exp.comments=cmts; save(); }
-      renderCmts(cmts, expId);
-    }).then(u => { _cmtUnsub = u; });
+function loadCmts(expId){
+  if(_cmtUnsub){try{_cmtUnsub();}catch(e){}  _cmtUnsub=null;}
+  const exp=S.expenses.find(e=>e.id===expId);
+  renderCmts(exp?.comments||[],expId);
+  if(S.online&&exp?._fid&&window._subComments){
+    window._subComments(S.tripId,exp._fid,cmts=>{
+      if(exp){exp.comments=cmts;save();}
+      renderCmts(cmts,expId);
+    }).then(u=>{_cmtUnsub=u;});
   }
 }
-function renderCmts(cmts, expId) {
-  const el = document.getElementById('cmt-list');
-  if (!el) return;
-  el.innerHTML = !cmts.length
-    ? '<p style="font-size:12px;color:var(--mu);padding:2px 0 10px">No comments yet</p>'
-    : cmts.map(c => `
-      <div class="citem">
-        <div class="cav" style="background:${col(c.author)};color:#0a0a0f">${ini(c.author)}</div>
-        <div class="cbody">
-          <div class="cname" style="color:${col(c.author)}">${c.author}</div>
-          <div class="ctxt">${c.text}</div>
-          <div class="ctime">${c.ts ? new Date(c.ts).toLocaleString() : ''}</div>
-        </div>
-      </div>`).join('');
+function renderCmts(cmts,expId){
+  const el=document.getElementById('cmt-list'); if(!el) return;
+  el.innerHTML=!cmts.length
+    ?'<p style="font-size:12px;color:var(--mu);padding:2px 0 8px">No comments yet</p>'
+    :cmts.map(c=>`<div class="citem">
+      <div class="cav" style="background:${col(c.author)};color:#0a0a0f">${ini(c.author)}</div>
+      <div class="cbody"><div class="cname" style="color:${col(c.author)}">${c.author}</div><div class="ctxt">${c.text}</div><div class="ctime">${c.ts?new Date(c.ts).toLocaleString():''}</div></div>
+    </div>`).join('');
 }
-async function postCmt(expId) {
-  const inp = document.getElementById('cmt-inp');
-  const txt = inp.value.trim(); if (!txt) return;
-  inp.value = '';
-  const cmt = { author: S.myName, text: txt, ts: Date.now() };
-  const exp = S.expenses.find(e=>e.id===expId);
-  if (exp) {
-    if (!exp.comments) exp.comments=[];
-    exp.comments.push(cmt); save();
-    renderCmts(exp.comments, expId);
-    if (S.online && exp._fid && window._pushComment) await window._pushComment(S.tripId, exp._fid, cmt);
+async function postCmt(expId){
+  const inp=document.getElementById('cmt-inp');
+  const txt=inp.value.trim(); if(!txt) return;
+  inp.value='';
+  const cmt={author:S.myName,text:txt,ts:Date.now()};
+  const exp=S.expenses.find(e=>e.id===expId);
+  if(exp){
+    if(!exp.comments) exp.comments=[];
+    exp.comments.push(cmt); save(); renderCmts(exp.comments,expId);
+    if(S.online&&exp._fid&&window._pushComment) await window._pushComment(S.tripId,exp._fid,cmt);
   }
 }
-
-async function delExp(id) {
-  if (!confirm('Delete this expense?')) return;
-  const exp = S.expenses.find(e=>e.id===id);
-  S.expenses = S.expenses.filter(e=>e.id!==id);
-  S.pending  = S.pending.filter(x=>x!==id);
+async function delExp(id){
+  if(!confirm('Delete this expense?')) return;
+  const exp=S.expenses.find(e=>e.id===id);
+  S.expenses=S.expenses.filter(e=>e.id!==id);
+  S.pending=S.pending.filter(x=>x!==id);
   save(); closeM('det-modal'); renderExp(); toast('🗑️ Deleted');
-  if (S.online && exp?._fid && window._delExp) await window._delExp(S.tripId, exp._fid);
+  if(S.online&&exp?._fid&&window._delExp) await window._delExp(S.tripId,exp._fid);
 }
 
-// ── RECEIPT SCAN ───────────────────────────────────────────────────────────────
-async function scanReceipt(input) {
-  const file = input.files[0]; if (!file) return;
-  document.getElementById('rzone').style.display = 'none';
-  document.getElementById('scan-ov').style.display = '';
-  try {
-    const b64 = await new Promise((res,rej) => { const r=new FileReader(); r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(file); });
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514', max_tokens: 300,
-        messages: [{ role:'user', content:[
-          { type:'image', source:{ type:'base64', media_type: file.type||'image/jpeg', data: b64 } },
-          { type:'text', text:'Extract from this receipt: the total amount and the merchant or item name. Reply ONLY as JSON with no extra text: {"amount":99.50,"description":"Merchant Name"}' }
-        ]}]
-      })
-    });
-    const data = await resp.json();
-    const raw  = (data.content||[]).find(c=>c.type==='text')?.text||'{}';
-    const parsed = JSON.parse(raw.replace(/```json|```/g,'').trim());
-    if (parsed.amount)      document.getElementById('ea').value = parsed.amount;
-    if (parsed.description) document.getElementById('ed').value = parsed.description;
+// ─── RECEIPT SCAN ─────────────────────────────────────────────────────────────
+async function scanReceipt(input){
+  const file=input.files[0]; if(!file) return;
+  document.getElementById('rzone').style.display='none';
+  document.getElementById('scan-ov').style.display='';
+  try{
+    const b64=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:[{type:'image',source:{type:'base64',media_type:file.type||'image/jpeg',data:b64}},{type:'text',text:'Extract from this receipt the total amount and merchant name. Reply ONLY as JSON: {"amount":99.50,"description":"Merchant Name"}'}]}]})});
+    const data=await resp.json();
+    const raw=(data.content||[]).find(c=>c.type==='text')?.text||'{}';
+    const p=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    if(p.amount) document.getElementById('ea').value=p.amount;
+    if(p.description) document.getElementById('ed').value=p.description;
     toast('📸 Receipt scanned!');
-  } catch(e) { toast('Could not read receipt — fill in manually'); }
-  document.getElementById('scan-ov').style.display = 'none';
-  document.getElementById('rzone').style.display = '';
-  input.value = '';
+  }catch(e){toast('Could not read receipt — fill in manually');}
+  document.getElementById('scan-ov').style.display='none';
+  document.getElementById('rzone').style.display='';
+  input.value='';
 }
 
-// ── SUMMARY + CHARTS ──────────────────────────────────────────────────────────
-let _ch = [];
-function renderSummary() {
-  const exps    = S.expenses;
-  const members = S.members;
-  const total   = exps.reduce((a,e) => a+parseFloat(e.amount||0), 0);
-  const settled = exps.filter(e=>e.settled).length;
+// ═══════════════════════════════════════════════════════════════════
+// CATEGORIES (admin only for edit/delete/add)
+// ═══════════════════════════════════════════════════════════════════
+function renderCategories(){
+  const isAdmin=S.isAdmin;
+  document.getElementById('cat-locked').style.display  = isAdmin?'none':'flex';
+  document.getElementById('cat-add-form').style.display= isAdmin?'':'none';
+  document.getElementById('cat-sub').textContent = isAdmin ? `${S.categories.length} categories · Admin` : `${S.categories.length} categories · View only`;
 
-  // Balances
-  const paid={}, owed={};
-  members.forEach(m => { paid[m]=0; owed[m]=0; });
-  exps.forEach(e => {
-    const amt = parseFloat(e.amount||0);
-    paid[e.paidBy] = (paid[e.paidBy]||0) + amt;
-    if (e.splitType==='solo') return;
-    const parts = e.participants||members;
-    if ((e.splitType==='custom'||e.splitType==='pct') && e.customSplits) {
-      parts.forEach(p => { owed[p]=(owed[p]||0)+parseFloat(e.customSplits[p]||0); });
-    } else {
-      const share = amt/parts.length;
-      parts.forEach(p => { owed[p]=(owed[p]||0)+share; });
-    }
-  });
-  const bal = {}; members.forEach(m => { bal[m]=(paid[m]||0)-(owed[m]||0); });
-  const settlements = computeSettle(bal);
-
-  // Category
-  const byCat={};
-  exps.forEach(e => { const c=e.category||'Other'; byCat[c]=(byCat[c]||0)+parseFloat(e.amount||0); });
-  const catArr = Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
-
-  // By date (last 14 days)
-  const byDate={};
-  exps.forEach(e => { if(e.date) byDate[e.date]=(byDate[e.date]||0)+parseFloat(e.amount||0); });
-  const dateArr = Object.entries(byDate).sort((a,b)=>a[0]>b[0]?1:-1).slice(-14);
-
-  // By member
-  const byMem={};
-  members.forEach(m => { byMem[m]=exps.filter(e=>e.paidBy===m).reduce((a,e)=>a+parseFloat(e.amount||0),0); });
-
-  _ch.forEach(c => { try{c.destroy();}catch(e){} }); _ch=[];
-
-  document.getElementById('sum-body').innerHTML = `
-    <div class="shero">
-      <div class="slbl">Total Spent</div>
-      <div class="sbig">${fmt(total)}</div>
-      <div class="ssub">${exps.length} expenses · ${settled} settled · ${members.length} members</div>
-    </div>
-
-    <div class="sec">
-      <div class="sectit">Balances</div>
-      <div class="blist">${members.map(m => {
-        const b = bal[m]||0;
-        return `<div class="brow">
-          <div class="bav" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>
-          <div class="binfo">
-            <div class="bname">${m}${m===S.myName?' <span style="color:var(--mu);font-size:12px">(you)</span>':''}</div>
-            <div class="bsub">Paid ${fmt(paid[m]||0)}</div>
-          </div>
-          <div class="bamt ${b>=0?'pos':'neg'}">${b>=0?'+':''}${fmt(b)}</div>
-        </div>`;
-      }).join('')}</div>
-    </div>
-
-    ${settlements.length ? `
-    <div class="sec">
-      <div class="sectit">Who Pays Who</div>
-      <div class="blist">${settlements.map(s => `
-        <div class="srow">
-          <span class="pill">${s.from}</span>
-          <span class="arrow">→</span>
-          <span class="pill">${s.to}</span>
-          <span class="sval">${fmt(s.amount)}</span>
-          <button class="rec-btn" onclick="recordSettlement('${s.from}','${s.to}',${s.amount.toFixed(2)})">Record ✓</button>
-        </div>`).join('')}
-      </div>
-    </div>` : `
-    <div class="sec"><div class="empty" style="padding:24px 0"><div class="ei">🎉</div><h3>All settled up!</h3></div></div>`}
-
-    <div class="chart-card">
-      <div class="chart-tit">Spending by day</div>
-      <div class="chart-wrap"><canvas id="ch-day"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-tit">By category</div>
-      <div class="chart-wrap" style="height:200px"><canvas id="ch-cat"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-tit">Who paid most</div>
-      <div class="chart-wrap"><canvas id="ch-mem"></canvas></div>
-    </div>
-
-    <div class="sec" style="margin-top:4px">
-      <div class="sectit">Category Breakdown</div>
-      <div class="blist">${catArr.map(([cat,amt]) => {
-        const c=CATS.find(x=>x.l===cat)||CATS[9];
-        const pct=total?Math.round(amt/total*100):0;
-        return `<div class="brow"><div style="font-size:22px">${c.e}</div>
-          <div class="binfo"><div class="bname">${cat}</div><div class="bsub">${pct}% of total</div></div>
-          <div class="bamt" style="color:var(--tx)">${fmt(amt)}</div></div>`;
-      }).join('')}</div>
-    </div>
-  `;
-
-  // Draw Charts
-  const gc='rgba(255,255,255,0.06)', tc='rgba(240,240,245,0.45)';
-  const base = { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
-    scales:{x:{grid:{color:gc},ticks:{color:tc,font:{size:11}}}, y:{grid:{color:gc},ticks:{color:tc,font:{size:11}}}} };
-  const pal = ['#c8f060','#7c6ff7','#f0a060','#60f0a0','#f06090','#60c8f0','#f0e060'];
-
-  if (dateArr.length) {
-    _ch.push(new Chart(document.getElementById('ch-day'), {
-      type:'bar',
-      data:{ labels: dateArr.map(([d])=>d.slice(5)), datasets:[{ data:dateArr.map(([,v])=>+v.toFixed(2)), backgroundColor:'#c8f06088', borderColor:'#c8f060', borderWidth:1.5, borderRadius:5 }] },
-      options: base
-    }));
+  // emoji picker (admin only)
+  if(isAdmin){
+    document.getElementById('emoji-picker').innerHTML=EMOJI_POOL.map(e=>
+      `<div class="ep-btn${e===EMOJI_SEL.v?' sel':''}" onclick="selEmoji(this,'${e}')">${e}</div>`
+    ).join('');
   }
-  if (catArr.length) {
-    _ch.push(new Chart(document.getElementById('ch-cat'), {
-      type:'doughnut',
-      data:{ labels:catArr.map(([c])=>c), datasets:[{ data:catArr.map(([,v])=>+v.toFixed(2)), backgroundColor:pal.slice(0,catArr.length), borderWidth:0, hoverOffset:5 }] },
-      options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:true, position:'right', labels:{ color:tc, font:{size:11}, boxWidth:10 } } } }
-    }));
-  }
-  if (members.length) {
-    _ch.push(new Chart(document.getElementById('ch-mem'), {
-      type:'bar',
-      data:{ labels:members, datasets:[{ data:members.map(m=>+(byMem[m]||0).toFixed(2)), backgroundColor:members.map((_,i)=>pal[i%pal.length]+'88'), borderColor:members.map((_,i)=>pal[i%pal.length]), borderWidth:1.5, borderRadius:5 }] },
-      options:{ ...base, indexAxis:'y' }
-    }));
-  }
+
+  // Usage count per category
+  const usageCount={};
+  S.expenses.forEach(e=>{usageCount[e.category||'Other']=(usageCount[e.category||'Other']||0)+1;});
+
+  document.getElementById('cat-list').innerHTML=S.categories.map(c=>`
+    <div class="cat-manage-item">
+      <div class="cat-manage-emoji">${c.e}</div>
+      <div class="cat-manage-name">${c.l}</div>
+      <div class="cat-manage-count">${usageCount[c.l]||0} uses</div>
+      ${isAdmin&&!['Other'].includes(c.l)?`<button class="cat-del" onclick="deleteCat('${c.l}')" title="Delete">×</button>`:'<div style="width:28px"></div>'}
+    </div>`).join('');
 }
 
-function computeSettle(bal) {
-  const cr=[], de=[];
-  Object.entries(bal).forEach(([n,b]) => { if(b>0.005) cr.push({n,a:b}); else if(b<-0.005) de.push({n,a:-b}); });
-  cr.sort((a,b)=>b.a-a.a); de.sort((a,b)=>b.a-a.a);
-  const out=[]; let i=0,j=0;
-  while(i<de.length&&j<cr.length) {
-    const a=Math.min(de[i].a,cr[j].a);
-    out.push({from:de[i].n,to:cr[j].n,amount:a});
-    de[i].a-=a; cr[j].a-=a;
-    if(de[i].a<0.005)i++; if(cr[j].a<0.005)j++;
-  }
-  return out;
+function selEmoji(el,e){
+  document.querySelectorAll('.ep-btn').forEach(b=>{b.classList.remove('sel');});
+  el.classList.add('sel'); EMOJI_SEL.v=e;
 }
 
-// ── MEMBERS ───────────────────────────────────────────────────────────────────
-function renderMembers() {
-  document.getElementById('mem-sub').textContent = S.members.length + ' members';
+async function addCategory(){
+  if(!S.isAdmin){toast('Only the trip creator can add categories');return;}
+  const name=document.getElementById('new-cat-name').value.trim();
+  if(!name){toast('Enter a category name');return;}
+  if(S.categories.find(c=>c.l.toLowerCase()===name.toLowerCase())){toast('Category already exists');return;}
+  const newCat={e:EMOJI_SEL.v,l:name};
+  S.categories.push(newCat);
+  document.getElementById('new-cat-name').value='';
+  save(); renderCategories();
+  if(S.online&&window._pushMeta) await window._pushMeta(S.tripId,{categories:S.categories});
+  toast('✅ Category added');
+}
+
+async function deleteCat(label){
+  if(!S.isAdmin){toast('Only the trip creator can delete categories');return;}
+  const inUse=S.expenses.filter(e=>e.category===label).length;
+  if(inUse>0){toast(`⚠️ "${label}" is used by ${inUse} expense${inUse>1?'s':''}. Reassign them first.`);return;}
+  if(!confirm(`Delete category "${label}"?`)) return;
+  S.categories=S.categories.filter(c=>c.l!==label);
+  save(); renderCategories();
+  if(S.online&&window._pushMeta) await window._pushMeta(S.tripId,{categories:S.categories});
+  toast('🗑️ Category deleted');
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// MEMBERS
+// ═══════════════════════════════════════════════════════════════════
+function renderMembers(){
+  document.getElementById('mem-sub').textContent=S.members.length+' members';
   const paid={};
-  S.members.forEach(m => { paid[m]=0; });
-  S.expenses.forEach(e => { paid[e.paidBy]=(paid[e.paidBy]||0)+parseFloat(e.amount||0); });
-  document.getElementById('mem-list').innerHTML = S.members.map(m => `
+  S.members.forEach(m=>{paid[m]=0;});
+  S.expenses.forEach(e=>{paid[e.paidBy]=(paid[e.paidBy]||0)+parseFloat(e.amount||0);});
+  document.getElementById('mem-list').innerHTML=S.members.map(m=>`
     <div class="mcard">
-      <div class="mav" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>
+      <div class="mav-lg" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>
       <div class="minfo">
-        <div class="mname">${m}${m===S.myName?'<span class="you-tag">you</span>':''}</div>
+        <div class="mname">${m}${m===S.myName?'<span class="you-tag">you</span>':''}${m===S.members[0]?'<span class="admin-tag">admin</span>':''}</div>
         <div class="mstats">Paid ${fmt(paid[m]||0)} · ${S.expenses.filter(e=>e.paidBy===m).length} expenses</div>
       </div>
     </div>`).join('');
 }
 
-async function addMemTrip() {
-  const inp = document.getElementById('nm-inp');
-  const n = inp.value.trim(); if (!n) return;
-  if (S.members.includes(n)) { toast('Already in trip'); return; }
+async function addMemTrip(){
+  const inp=document.getElementById('nm-inp'),n=inp.value.trim();
+  if(!n) return;
+  if(S.members.includes(n)){toast('Already in trip');return;}
   S.members.push(n); save(); inp.value=''; renderMembers();
-  if (S.online && window._pushMeta) await window._pushMeta(S.tripId, { members: S.members });
-  toast('✅ Added ' + n);
+  if(S.online&&window._pushMeta) await window._pushMeta(S.tripId,{members:S.members});
+  toast('✅ Added '+n);
 }
 
-// ── SHARE ─────────────────────────────────────────────────────────────────────
-function doShare() {
-  const url  = location.href.split('?')[0] + '?join=' + S.tripId;
-  const text = `Join my trip "${S.tripName}" on TripWise!\nCode: ${S.tripId}\nLink: ${url}`;
-  if (navigator.share) navigator.share({ title:'Join '+S.tripName, text, url }).catch(()=>{});
+// ─── SHARE ────────────────────────────────────────────────────────────────────
+function doShare(){
+  const url=location.href.split('?')[0]+'?join='+S.tripId;
+  const text=`Join my trip "${S.tripName}" on TripWise!\nCode: ${S.tripId}\nLink: ${url}`;
+  if(navigator.share) navigator.share({title:'Join '+S.tripName,text,url}).catch(()=>{});
   else navigator.clipboard.writeText(text).then(()=>toast('📋 Copied!')).catch(()=>prompt('Copy:',url));
 }
 
-// ── REMOTE CALLBACKS ──────────────────────────────────────────────────────────
-window._onRemExp = (data) => {
-  const idx = S.expenses.findIndex(e=>e._fid===data._fid||e.id===data.id);
-  if (idx!==-1) S.expenses[idx] = {...S.expenses[idx],...data};
-  else {
-    const dup = S.expenses.find(e=>e.description===data.description&&e.amount===data.amount&&e.date===data.date&&e.paidBy===data.paidBy);
-    if (dup) dup._fid=data._fid; else S.expenses.push(data);
+// ─── REMOTE CALLBACKS ─────────────────────────────────────────────────────────
+window._onRemExp=(data)=>{
+  const idx=S.expenses.findIndex(e=>e._fid===data._fid||e.id===data.id);
+  if(idx!==-1) S.expenses[idx]={...S.expenses[idx],...data};
+  else{
+    const dup=S.expenses.find(e=>e.description===data.description&&e.amount===data.amount&&e.date===data.date&&e.paidBy===data.paidBy);
+    if(dup) dup._fid=data._fid; else S.expenses.push(data);
   }
   save();
-  if (document.getElementById('expenses-screen').classList.contains('active')) renderExp();
+  if(document.getElementById('expenses-screen').classList.contains('active')) renderExp();
+  if(document.getElementById('dashboard-screen').classList.contains('active')) renderDashboard();
 };
-window._onRemDel = (fid) => {
-  S.expenses = S.expenses.filter(e=>e._fid!==fid); save();
-  if (document.getElementById('expenses-screen').classList.contains('active')) renderExp();
+window._onRemDel=(fid)=>{
+  S.expenses=S.expenses.filter(e=>e._fid!==fid); save();
+  if(document.getElementById('expenses-screen').classList.contains('active')) renderExp();
+  if(document.getElementById('dashboard-screen').classList.contains('active')) renderDashboard();
 };
-window._onRemMeta = (data) => {
-  if (data.tripName) S.tripName = data.tripName;
-  if (data.currency) S.currency = data.currency;
-  if (data.members)  data.members.forEach(m=>{ if(!S.members.includes(m)) S.members.push(m); });
-  save(); renderMembers();
-  document.getElementById('trip-hdr').textContent = S.tripName;
+window._onRemMeta=(data)=>{
+  if(data.tripName) S.tripName=data.tripName;
+  if(data.currency) S.currency=data.currency;
+  if(data.members)  data.members.forEach(m=>{if(!S.members.includes(m))S.members.push(m);});
+  if(data.categories) {
+    // Merge: add any new cats from remote that we don't have
+    data.categories.forEach(rc=>{if(!S.categories.find(c=>c.l===rc.l))S.categories.push(rc);});
+    // Remove cats deleted by admin (if we're not admin)
+    if(!S.isAdmin) S.categories=S.categories.filter(lc=>data.categories.find(rc=>rc.l===lc.l));
+  }
+  save();
+  document.getElementById('trip-hdr').textContent=S.tripName;
+  if(document.getElementById('members-screen').classList.contains('active')) renderMembers();
+  if(document.getElementById('categories-screen').classList.contains('active')) renderCategories();
 };
 
-// ── BADGE + SYNC ──────────────────────────────────────────────────────────────
-function updateBadge() {
-  const n = S.pending.length;
-  document.getElementById('nb-badge').style.display = n ? '' : 'none';
-  document.getElementById('pend-lbl').textContent   = n ? n+' pending' : '';
+// ─── PENDING BADGE ────────────────────────────────────────────────────────────
+function updateBadge(){
+  const n=S.pending.length;
+  document.getElementById('nb-badge').style.display=n?'':'none';
+  document.getElementById('pend-lbl').textContent=n?n+' pending':'';
 }
-async function syncPending() {
-  if (!window._pushExp || !S.tripId) return;
-  for (const id of [...S.pending]) {
-    const exp = S.expenses.find(e=>e.id===id);
-    if (!exp) { S.pending=S.pending.filter(x=>x!==id); continue; }
-    const fid = await window._pushExp(S.tripId, exp);
-    if (fid) { exp._fid=fid; S.pending=S.pending.filter(x=>x!==id); }
+async function syncPending(){
+  if(!window._pushExp||!S.tripId) return;
+  for(const id of[...S.pending]){
+    const exp=S.expenses.find(e=>e.id===id);
+    if(!exp){S.pending=S.pending.filter(x=>x!==id);continue;}
+    const fid=await window._pushExp(S.tripId,exp);
+    if(fid){exp._fid=fid;S.pending=S.pending.filter(x=>x!==id);}
   }
   save(); updateBadge();
-  if (!S.pending.length) toast('☁️ All synced');
+  if(!S.pending.length) toast('☁️ All synced');
 }
 
-// ── ONLINE / OFFLINE ──────────────────────────────────────────────────────────
-function updateOnline() {
-  S.online = navigator.onLine;
-  document.getElementById('sdot').classList.toggle('on', S.online);
-  document.getElementById('stxt').textContent = S.online ? 'Online' : 'Offline';
-  if (S.online) { syncPending(); if(S.tripId && window._startSync) window._startSync(S.tripId); }
+// ─── ONLINE/OFFLINE ───────────────────────────────────────────────────────────
+function updateOnline(){
+  S.online=navigator.onLine;
+  document.getElementById('sdot').classList.toggle('on',S.online);
+  document.getElementById('stxt').textContent=S.online?'Online':'Offline';
+  if(S.online){syncPending();if(S.tripId&&window._startSync)window._startSync(S.tripId);}
 }
-window.addEventListener('online',  updateOnline);
-window.addEventListener('offline', updateOnline);
+window.addEventListener('online',updateOnline);
+window.addEventListener('offline',updateOnline);
 
-// ── MODALS ────────────────────────────────────────────────────────────────────
-function openM(id) { document.getElementById(id).classList.add('open'); }
-function closeM(id) {
+// ─── MODALS ───────────────────────────────────────────────────────────────────
+function openM(id){document.getElementById(id).classList.add('open');}
+function closeM(id){
   document.getElementById(id).classList.remove('open');
-  if (id==='det-modal' && _cmtUnsub) { try{_cmtUnsub();}catch(e){} _cmtUnsub=null; }
+  if(id==='det-modal'&&_cmtUnsub){try{_cmtUnsub();}catch(e){}_cmtUnsub=null;}
 }
-document.querySelectorAll('.mov').forEach(o => o.addEventListener('click', e => { if(e.target===o) o.classList.remove('open'); }));
+document.querySelectorAll('.mov').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 
-// ── TOAST ─────────────────────────────────────────────────────────────────────
+// ─── TOAST ────────────────────────────────────────────────────────────────────
 let _tt;
-function toast(msg) {
+function toast(msg){
   const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  clearTimeout(_tt); _tt=setTimeout(()=>el.classList.remove('show'), 2600);
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),2700);
 }
 
-// ── PWA ───────────────────────────────────────────────────────────────────────
-function injectManifest() {
-  const m = { name:'TripWise', short_name:'TripWise', description:'Split trip expenses', start_url:'./', display:'standalone', background_color:'#0a0a0f', theme_color:'#0a0a0f', orientation:'portrait-primary',
-    icons:[{ src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%230a0a0f'/><text y='130' font-size='110' text-anchor='middle' x='96'>✈️</text></svg>", sizes:'192x192', type:'image/svg+xml' }] };
-  const blob = new Blob([JSON.stringify(m)], {type:'application/json'});
-  const link = document.getElementById('manifest-link');
-  link.href = URL.createObjectURL(blob); link.rel = 'manifest';
+// ─── PWA ──────────────────────────────────────────────────────────────────────
+function injectManifest(){
+  const m={name:'TripWise',short_name:'TripWise',description:'Split trip expenses',start_url:'./',display:'standalone',background_color:'#0a0a0f',theme_color:'#0a0a0f',orientation:'portrait-primary',icons:[{src:"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%230a0a0f'/><text y='130' font-size='110' text-anchor='middle' x='96'>✈️</text></svg>",sizes:'192x192',type:'image/svg+xml'}]};
+  const blob=new Blob([JSON.stringify(m)],{type:'application/json'});
+  const l=document.getElementById('manifest-link');l.href=URL.createObjectURL(blob);l.rel='manifest';
 }
-function registerSW() {
-  if (!('serviceWorker' in navigator)) return;
-  const sw = `const C='tw-v3';
-self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll([location.href])).then(()=>self.skipWaiting()));});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{caches.open(C).then(c=>c.put(e.request,r.clone()));return r;}).catch(()=>caches.match(e.request)));});`;
+function registerSW(){
+  if(!('serviceWorker'in navigator)) return;
+  const sw=`const C='tw-v4';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll([location.href])).then(()=>self.skipWaiting()));});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(fetch(e.request).then(r=>{caches.open(C).then(c=>c.put(e.request,r.clone()));return r;}).catch(()=>caches.match(e.request)));});`;
   navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
 }
-function checkURLJoin() {
-  const p = new URLSearchParams(location.search);
-  const j = p.get('join');
-  if (j && !S.tripId) { setupTab('j'); document.getElementById('j-code').value=j.toUpperCase(); }
+function checkURLJoin(){
+  const p=new URLSearchParams(location.search),j=p.get('join');
+  if(j&&!S.tripId){setupTab('j');document.getElementById('j-code').value=j.toUpperCase();}
 }
 
-// ── INIT ──────────────────────────────────────────────────────────────────────
-function init() {
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+function init(){
   injectManifest(); registerSW(); updateOnline();
-  setTimeout(() => {
-    if (load() && S.tripId) {
+  setTimeout(()=>{
+    if(load()&&S.tripId){
       enterTrip();
-      if (window._startSync) window._startSync(S.tripId);
+      if(window._startSync) window._startSync(S.tripId);
       updateBadge();
-    } else {
-      showScr('setup');
-      checkURLJoin();
-    }
-  }, 300);
+    } else { showScr('setup'); checkURLJoin(); }
+  },300);
 }
 init();
 
-// Expose globals
-Object.assign(window, {
-  setupTab, addSM, removeSM, createTrip, joinTrip, leaveTrip,
-  go, setF, openAddExp, saveExp, selCat, selPayer, setSplit, togP, scanReceipt,
-  showDet, delExp, markSettled, recordSettlement, postCmt,
-  renderSummary, renderMembers, addMemTrip, doShare, openM, closeM
+Object.assign(window,{
+  setupTab,addSM,removeSM,createTrip,joinTrip,leaveTrip,go,
+  setF,openAddExp,saveExp,selCat,selPayer,setSplit,togP,scanReceipt,
+  showDet,delExp,markSettled,recordSettlement,postCmt,
+  renderCategories,addCategory,deleteCat,selEmoji,
+  renderMembers,addMemTrip,doShare,openM,closeM
 });
 </script>
 </body>
