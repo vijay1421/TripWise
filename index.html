@@ -286,6 +286,7 @@ textarea.fi{resize:none;height:68px}
         </div>
         <button class="btn bp" onclick="joinTrip()">Join Trip 🚀</button>
         <p style="margin-top:9px;font-size:12px;color:var(--mu);text-align:center">Get the 6-letter code from the trip creator</p>
+        <div id="join-debug" style="display:none;margin-top:12px;background:var(--sf2);border:1px solid var(--bd);border-radius:var(--rs);padding:10px 12px;font-size:11px;color:var(--mu);font-family:monospace;line-height:1.6;white-space:pre-wrap"></div>
       </div>
     </div>
   </div>
@@ -343,6 +344,12 @@ textarea.fi{resize:none;height:68px}
   <div class="section" style="margin-bottom:14px">
     <div class="sec-tit">Who Pays Who</div>
     <div id="dash-settlements"></div>
+  </div>
+
+  <!-- Recent Settlements confirmation log -->
+  <div class="section" style="margin-bottom:14px">
+    <div class="sec-tit">Recent Settlements</div>
+    <div id="dash-recent-settlements"></div>
   </div>
 </div>
 
@@ -483,27 +490,26 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
 // ──────────────────────────────────────────────────────────
-// 🔧 Replace with your Firebase config from firebase.google.com
-// New Project → Firestore Database → Web App → Config
+// ✅ Live Firebase config — tripwise-91008
 // ──────────────────────────────────────────────────────────
-const firebaseConfig = {
+const cfg = {
   apiKey: "AIzaSyAaWcc6ouHZ6AQ-lzGkP_WQZQrrw50GlbE",
   authDomain: "tripwise-91008.firebaseapp.com",
   projectId: "tripwise-91008",
   storageBucket: "tripwise-91008.firebasestorage.app",
   messagingSenderId: "603894129018",
-  appId: "1:603894129018:web:19de521ccb867821fc76c3",
-  measurementId: "G-WRP9V3QN9J"
+  appId: "1:603894129018:web:19de521ccb867821fc76c3"
 };
 
 let db = null, _subs = [];
 try {
-  const app = initializeApp(firebaseConfig);
+  const app = initializeApp(cfg);
   db = getFirestore(app);
-  enableIndexedDbPersistence(db).catch(() => {});
+  enableIndexedDbPersistence(db).catch((e) => console.warn('Persistence:', e.message));
   window._db = db; window._fbOk = true;
   window._fs = { doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc, updateDoc, serverTimestamp, query, orderBy };
-} catch(e) { window._fbOk = false; }
+  console.log('✅ Firebase connected:', cfg.projectId);
+} catch(e) { window._fbOk = false; console.error('❌ Firebase init failed:', e); }
 
 window._startSync = (tid) => {
   _subs.forEach(u => { try{u();}catch(e){} }); _subs = [];
@@ -514,26 +520,26 @@ window._startSync = (tid) => {
       if (ch.type==='removed') window._onRemDel(ch.doc.id);
       else window._onRemExp(d);
     });
-  }, ()=>{}));
+  }, (e)=>console.error('❌ Expense listener error:', e)));
   _subs.push(onSnapshot(doc(db,'trips',tid), snap => {
     if (snap.exists()) window._onRemMeta(snap.data());
-  }, ()=>{}));
+  }, (e)=>console.error('❌ Trip meta listener error:', e)));
 };
 window._pushExp = async (tid, exp) => {
-  if (!db) return null;
+  if (!db) { console.warn('⚠️ No db — expense stays pending:', exp.description); return null; }
   try {
     if (exp._fid) { await setDoc(doc(db,'trips',tid,'expenses',exp._fid),exp,{merge:true}); return exp._fid; }
     const r = await addDoc(collection(db,'trips',tid,'expenses'),{...exp,createdAt:serverTimestamp()});
     return r.id;
-  } catch(e) { return null; }
+  } catch(e) { console.error('❌ Push expense failed:', e.code||e.message); return null; }
 };
-window._delExp    = async (tid,fid) => { if(db&&fid) await deleteDoc(doc(db,'trips',tid,'expenses',fid)).catch(()=>{}); };
-window._pushMeta  = async (tid,meta) => { if(db) await setDoc(doc(db,'trips',tid),{...meta,updatedAt:serverTimestamp()},{merge:true}).catch(()=>{}); };
-window._fetchMeta = async (tid) => { if(!db) return null; try{const s=await getDoc(doc(db,'trips',tid));return s.exists()?s.data():null;}catch(e){return null;} };
-window._updateExp = async (tid,fid,data) => { if(db&&fid) await updateDoc(doc(db,'trips',tid,'expenses',fid),{...data,updatedAt:serverTimestamp()}).catch(()=>{}); };
+window._delExp    = async (tid,fid) => { if(db&&fid) await deleteDoc(doc(db,'trips',tid,'expenses',fid)).catch((e)=>console.error('❌ Delete failed:',e)); };
+window._pushMeta  = async (tid,meta) => { if(db) await setDoc(doc(db,'trips',tid),{...meta,updatedAt:serverTimestamp()},{merge:true}).catch((e)=>console.error('❌ Push meta failed:',e)); };
+window._fetchMeta = async (tid) => { if(!db) return null; try{const s=await getDoc(doc(db,'trips',tid));return s.exists()?s.data():null;}catch(e){console.error('❌ Fetch meta failed:',e);return null;} };
+window._updateExp = async (tid,fid,data) => { if(db&&fid) await updateDoc(doc(db,'trips',tid,'expenses',fid),{...data,updatedAt:serverTimestamp()}).catch((e)=>console.error('❌ Update failed:',e)); };
 window._pushComment = async (tid,fid,cmt) => {
   if(!db) return null;
-  try{const r=await addDoc(collection(db,'trips',tid,'expenses',fid,'comments'),{...cmt,createdAt:serverTimestamp()});return r.id;}catch(e){return null;}
+  try{const r=await addDoc(collection(db,'trips',tid,'expenses',fid,'comments'),{...cmt,createdAt:serverTimestamp()});return r.id;}catch(e){console.error('❌ Push comment failed:',e);return null;}
 };
 window._subComments = async (tid,fid,cb) => {
   if(!db) return ()=>{};
@@ -622,9 +628,24 @@ async function createTrip(){
 }
 
 // ─── JOIN TRIP ────────────────────────────────────────────────────────────────
+// ─── WAIT FOR FIREBASE READY (handles slow networks) ─────────────────────────
+function waitForFirebase(maxMs=4000){
+  return new Promise(resolve=>{
+    const start=Date.now();
+    (function check(){
+      if(window._db || window._fbOk===false) return resolve(!!window._db);
+      if(Date.now()-start>maxMs) return resolve(!!window._db);
+      setTimeout(check,150);
+    })();
+  });
+}
+
 async function joinTrip(){
   const me   = document.getElementById('j-me').value.trim();
   const code = document.getElementById('j-code').value.trim().toUpperCase();
+  const dbg  = document.getElementById('join-debug');
+  dbg.style.display='none';
+
   if(!me)          { toast('Enter your name');        return; }
   if(code.length!==6){ toast('Enter 6-letter code'); return; }
 
@@ -633,9 +654,50 @@ async function joinTrip(){
     toast('⚠️ You are already in this trip!'); return;
   }
 
+  toast('🔍 Connecting…');
+  const ready = await waitForFirebase();  // give the SDK time to load on slow networks
+  if(!ready){
+    toast('❌ Could not connect — check your internet');
+    dbg.style.display='block';
+    dbg.textContent =
+`Diagnostic info (screenshot this):
+Online: ${navigator.onLine}
+Firebase loaded: false (timed out waiting)
+This usually means Firestore failed to load from gstatic.com.
+Try: refresh the page, switch wifi/data, or wait a few seconds and retry.`;
+    return;
+  }
+
   toast('🔍 Looking up trip…');
-  const meta = window._fetchMeta ? await window._fetchMeta(code) : null;
-  if(!meta){ toast('❌ Trip not found — check code or go online'); return; }
+
+  // Diagnostic snapshot before attempting fetch
+  const diag = {
+    online: navigator.onLine,
+    firebaseInit: !!window._fbOk,
+    dbReady: !!window._db,
+    codeEntered: code,
+    timestamp: new Date().toLocaleTimeString()
+  };
+
+  let meta = null, fetchErr = null;
+  try {
+    meta = window._fetchMeta ? await window._fetchMeta(code) : null;
+  } catch(e) { fetchErr = e.message||String(e); }
+
+  if(!meta){
+    toast('❌ Trip not found — check code or go online');
+    dbg.style.display='block';
+    dbg.textContent =
+`Diagnostic info (screenshot this):
+Online: ${diag.online}
+Firebase initialized: ${diag.firebaseInit}
+Firestore ready: ${diag.dbReady}
+Code searched: ${diag.codeEntered}
+Time: ${diag.timestamp}
+Fetch error: ${fetchErr || 'none (doc just not found)'}`;
+    console.error('🔎 Join failed diagnostic:', diag, fetchErr);
+    return;
+  }
 
   const members = meta.members||[];
   if(!members.includes(me)) members.push(me);
@@ -700,21 +762,22 @@ function go(id){
 // ═══════════════════════════════════════════════════════════════════
 let _dCharts = [];
 function renderDashboard(){
-  const exps    = S.expenses;
-  const members = S.members;
-  const total   = exps.reduce((a,e)=>a+parseFloat(e.amount||0),0);
-  const unsettled = exps.filter(e=>!e.settled).length;
+  const exps      = S.expenses;
+  const realExps  = exps.filter(e=>!e._isSettlement);   // exclude settlement transfers from spend stats
+  const members   = S.members;
+  const total     = realExps.reduce((a,e)=>a+parseFloat(e.amount||0),0);
+  const unsettled = realExps.filter(e=>!e.settled).length;
 
   document.getElementById('dash-trip-name').textContent = S.tripName;
   document.getElementById('dash-meta').textContent = `${members.length} members · ${S.currency} · Code: ${S.tripId}`;
   document.getElementById('ds-total').textContent   = fmt(total);
-  document.getElementById('ds-count').textContent   = exps.length;
+  document.getElementById('ds-count').textContent   = realExps.length;
   document.getElementById('ds-unsettled').textContent = unsettled;
   document.getElementById('dash-code').textContent  = S.tripId;
 
-  // ── Category bars ──
+  // ── Category bars (real expenses only) ──
   const byCat = {};
-  exps.forEach(e => { const c=e.category||'Other'; byCat[c]=(byCat[c]||0)+parseFloat(e.amount||0); });
+  realExps.forEach(e => { const c=e.category||'Other'; byCat[c]=(byCat[c]||0)+parseFloat(e.amount||0); });
   const catArr = Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
   const catPal = ['#c8f060','#7c6ff7','#f0a060','#60f0a0','#f06090','#60c8f0','#f0e060','#a060f0'];
 
@@ -736,11 +799,14 @@ function renderDashboard(){
   }).join('') : '<p style="font-size:13px;color:var(--mu);padding:4px 0">No expenses yet</p>';
 
   // ── Per-person breakdown + balances ──
-  const paid={}, owed={};
-  members.forEach(m=>{paid[m]=0;owed[m]=0;});
+  // Balance math MUST include settlements (that's how debts net to zero).
+  // Display stats (paid amount, expense count) should reflect real spending only.
+  const paid={}, owed={}, paidReal={};
+  members.forEach(m=>{paid[m]=0;owed[m]=0;paidReal[m]=0;});
   exps.forEach(e=>{
     const amt=parseFloat(e.amount||0);
     paid[e.paidBy]=(paid[e.paidBy]||0)+amt;
+    if(!e._isSettlement) paidReal[e.paidBy]=(paidReal[e.paidBy]||0)+amt;
     if(e.splitType==='solo') return;
     const parts=e.participants||members;
     if((e.splitType==='custom'||e.splitType==='pct')&&e.customSplits){
@@ -759,16 +825,16 @@ function renderDashboard(){
       <div class="pav" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>
       <div class="person-info">
         <div class="person-name">${m}${m===S.myName?' <span style="font-size:11px;color:var(--mu)">(you)</span>':''}</div>
-        <div class="person-sub">Paid ${fmt(paid[m]||0)} · ${exps.filter(e=>e.paidBy===m).length} expenses</div>
+        <div class="person-sub">Paid ${fmt(paidReal[m]||0)} · ${realExps.filter(e=>e.paidBy===m).length} expenses</div>
       </div>
       <div class="person-right">
-        <div class="person-amt">${fmt(paid[m]||0)}</div>
-        <div class="person-bal ${b>=0?'pos':'neg'}">${b>=0?'gets back':'owes'} ${fmt(Math.abs(b))}</div>
+        <div class="person-amt">${fmt(paidReal[m]||0)}</div>
+        <div class="person-bal ${b>=0?'pos':'neg'}">${Math.abs(b)<0.01?'settled up':(b>=0?'gets back':'owes')+' '+fmt(Math.abs(b))}</div>
       </div>
     </div>`;
   }).join('') : '<p style="font-size:13px;color:var(--mu)">No members yet</p>';
 
-  // ── Settlements ──
+  // ── Settlements (still owed) ──
   const settlements = computeSettle(bal);
   document.getElementById('dash-settlements').innerHTML = settlements.length ? settlements.map(s=>
     `<div class="srow">
@@ -778,15 +844,28 @@ function renderDashboard(){
     </div>`
   ).join('') : '<p style="font-size:13px;color:var(--ok)">🎉 All settled up!</p>';
 
+  // ── Recent settlements (confirmation log, so it doesn't feel like it vanished) ──
+  const recentSettlements = exps.filter(e=>e._isSettlement).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
+  const dashRecentEl = document.getElementById('dash-recent-settlements');
+  if (dashRecentEl) {
+    dashRecentEl.innerHTML = recentSettlements.length ? recentSettlements.map(s=>
+      `<div class="srow" style="opacity:.75">
+        <span class="pill">${s.paidBy}</span><span class="arrow">→</span><span class="pill">${Object.keys(s.customSplits||{})[0]||''}</span>
+        <span class="sval" style="color:var(--ok)">${fmt(s.amount)}</span>
+        <span style="font-size:11px;color:var(--ok);margin-left:auto">✅ settled · ${s.date}</span>
+      </div>`
+    ).join('') : '<p style="font-size:12px;color:var(--mu)">No settlements recorded yet</p>';
+  }
+
   // ── Charts ──
   _dCharts.forEach(c=>{try{c.destroy();}catch(e){}});_dCharts=[];
   const gc='rgba(255,255,255,0.05)',tc='rgba(240,240,245,0.42)';
   const baseOpts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
     scales:{x:{grid:{color:gc},ticks:{color:tc,font:{size:11}}},y:{grid:{color:gc},ticks:{color:tc,font:{size:11}}}}};
 
-  // Daily
+  // Daily (real spending only)
   const byDate={};
-  exps.forEach(e=>{if(e.date) byDate[e.date]=(byDate[e.date]||0)+parseFloat(e.amount||0);});
+  realExps.forEach(e=>{if(e.date) byDate[e.date]=(byDate[e.date]||0)+parseFloat(e.amount||0);});
   const dateArr=Object.entries(byDate).sort((a,b)=>a[0]>b[0]?1:-1).slice(-14);
   if(dateArr.length){
     _dCharts.push(new Chart(document.getElementById('ch-day'),{
@@ -838,9 +917,10 @@ async function recordSettlement(from,to,amount){
 // ═══════════════════════════════════════════════════════════════════
 function renderExp(){
   const exps=S.expenses;
+  const realExps=exps.filter(e=>!e._isSettlement);
   document.getElementById('exp-tit').textContent=S.tripName||'Expenses';
-  const total=exps.reduce((a,e)=>a+parseFloat(e.amount||0),0);
-  document.getElementById('exp-sub').textContent=`${exps.length} expenses · ${fmt(total)}`;
+  const total=realExps.reduce((a,e)=>a+parseFloat(e.amount||0),0);
+  document.getElementById('exp-sub').textContent=`${realExps.length} expenses · ${fmt(total)}`;
 
   let show=[...exps];
   if(S.filter==='mine')      show=show.filter(e=>e.paidBy===S.myName);
@@ -854,6 +934,17 @@ function renderExp(){
   }
   const pend=S.pending;
   el.innerHTML=show.map(e=>{
+    if(e._isSettlement){
+      const toName=Object.keys(e.customSplits||{})[0]||'';
+      return `<div class="ecard" style="border-color:rgba(96,240,160,.25);background:rgba(96,240,160,.04)" onclick="showDet('${e.id}')">
+        <div class="eicon" style="background:rgba(96,240,160,.15)">💸</div>
+        <div class="einfo">
+          <div class="etit">${pend.includes(e.id)?'🔄 ':''}Settlement: ${e.paidBy} → ${toName}<span class="sbadge">settled</span></div>
+          <div class="emeta">${e.date||''} · not counted as spending</div>
+        </div>
+        <div class="eamt"><div class="tot" style="color:var(--ok)">${fmt(e.amount)}</div><div class="per">paid back</div></div>
+      </div>`;
+    }
     const c=catOf(e.category);
     const pp=e.splitType==='solo'?'':fmt(e.amount/Math.max((e.participants||[]).length,1));
     return `<div class="ecard${e.settled?' settled-card':''}" onclick="showDet('${e.id}')">
@@ -1095,7 +1186,7 @@ function renderCategories(){
 
   // Usage count per category
   const usageCount={};
-  S.expenses.forEach(e=>{usageCount[e.category||'Other']=(usageCount[e.category||'Other']||0)+1;});
+  S.expenses.filter(e=>!e._isSettlement).forEach(e=>{usageCount[e.category||'Other']=(usageCount[e.category||'Other']||0)+1;});
 
   document.getElementById('cat-list').innerHTML=S.categories.map(c=>`
     <div class="cat-manage-item">
@@ -1140,15 +1231,16 @@ async function deleteCat(label){
 // ═══════════════════════════════════════════════════════════════════
 function renderMembers(){
   document.getElementById('mem-sub').textContent=S.members.length+' members';
+  const realExps=S.expenses.filter(e=>!e._isSettlement);
   const paid={};
   S.members.forEach(m=>{paid[m]=0;});
-  S.expenses.forEach(e=>{paid[e.paidBy]=(paid[e.paidBy]||0)+parseFloat(e.amount||0);});
+  realExps.forEach(e=>{paid[e.paidBy]=(paid[e.paidBy]||0)+parseFloat(e.amount||0);});
   document.getElementById('mem-list').innerHTML=S.members.map(m=>`
     <div class="mcard">
       <div class="mav-lg" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>
       <div class="minfo">
         <div class="mname">${m}${m===S.myName?'<span class="you-tag">you</span>':''}${m===S.members[0]?'<span class="admin-tag">admin</span>':''}</div>
-        <div class="mstats">Paid ${fmt(paid[m]||0)} · ${S.expenses.filter(e=>e.paidBy===m).length} expenses</div>
+        <div class="mstats">Paid ${fmt(paid[m]||0)} · ${realExps.filter(e=>e.paidBy===m).length} expenses</div>
       </div>
     </div>`).join('');
 }
@@ -1286,3 +1378,4 @@ Object.assign(window,{
 </script>
 </body>
 </html>
+>
