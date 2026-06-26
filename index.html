@@ -1235,14 +1235,40 @@ function renderMembers(){
   const paid={};
   S.members.forEach(m=>{paid[m]=0;});
   realExps.forEach(e=>{paid[e.paidBy]=(paid[e.paidBy]||0)+parseFloat(e.amount||0);});
-  document.getElementById('mem-list').innerHTML=S.members.map(m=>`
-    <div class="mcard">
+
+  document.getElementById('mem-list').innerHTML=S.members.map((m,idx)=>{
+    const isAdminMember = idx===0;
+    const isMe = m===S.myName;
+    const involvedCount = S.expenses.filter(e=>e.paidBy===m || (e.participants||[]).includes(m)).length;
+    const canDelete = S.isAdmin && !isAdminMember && !isMe;
+    return `<div class="mcard">
       <div class="mav-lg" style="background:${col(m)};color:#0a0a0f">${ini(m)}</div>
       <div class="minfo">
-        <div class="mname">${m}${m===S.myName?'<span class="you-tag">you</span>':''}${m===S.members[0]?'<span class="admin-tag">admin</span>':''}</div>
+        <div class="mname">${m}${isMe?'<span class="you-tag">you</span>':''}${isAdminMember?'<span class="admin-tag">admin</span>':''}</div>
         <div class="mstats">Paid ${fmt(paid[m]||0)} · ${realExps.filter(e=>e.paidBy===m).length} expenses</div>
       </div>
-    </div>`).join('');
+      ${canDelete?`<button class="cat-del" onclick="removeMember('${m}',${involvedCount})" title="Remove member">×</button>`:''}
+    </div>`;
+  }).join('');
+}
+
+async function removeMember(name, involvedCount){
+  if(!S.isAdmin){ toast('Only the trip admin can remove members'); return; }
+  if(name===S.members[0]){ toast('Cannot remove the trip admin'); return; }
+  if(name===S.myName){ toast('Use "Leave Trip" to remove yourself'); return; }
+
+  if(involvedCount>0){
+    toast(`⚠️ ${name} is linked to ${involvedCount} expense${involvedCount>1?'s':''} — can't remove`);
+    alert(`${name} has already paid for or split ${involvedCount} expense${involvedCount>1?'s':''} on this trip.\n\nRemoving them would break those records, so this is blocked.\n\nIf they were added by mistake but have real expenses, keep them in the trip — their balance will simply settle out. Only members with ZERO expense history can be removed.`);
+    return;
+  }
+
+  if(!confirm(`Remove ${name} from this trip?\n\nThey have no expenses recorded, so this is safe. They'll need to rejoin with the trip code if this was a mistake.`)) return;
+
+  S.members = S.members.filter(m=>m!==name);
+  save(); renderMembers();
+  toast(`✅ Removed ${name}`);
+  if(S.online && window._pushMeta) await window._pushMeta(S.tripId, { members: S.members });
 }
 
 async function addMemTrip(){
@@ -1282,7 +1308,12 @@ window._onRemDel=(fid)=>{
 window._onRemMeta=(data)=>{
   if(data.tripName) S.tripName=data.tripName;
   if(data.currency) S.currency=data.currency;
-  if(data.members)  data.members.forEach(m=>{if(!S.members.includes(m))S.members.push(m);});
+  if(data.members) {
+    // Mirror remote member list exactly — handles additions AND admin-initiated removals.
+    // Never drop yourself locally even if a stale write briefly omits you.
+    const remoteHasMe = data.members.includes(S.myName);
+    S.members = remoteHasMe ? [...data.members] : [...data.members, S.myName];
+  }
   if(data.categories) {
     // Merge: add any new cats from remote that we don't have
     data.categories.forEach(rc=>{if(!S.categories.find(c=>c.l===rc.l))S.categories.push(rc);});
@@ -1373,9 +1404,8 @@ Object.assign(window,{
   setF,openAddExp,saveExp,selCat,selPayer,setSplit,togP,scanReceipt,
   showDet,delExp,markSettled,recordSettlement,postCmt,
   renderCategories,addCategory,deleteCat,selEmoji,
-  renderMembers,addMemTrip,doShare,openM,closeM
+  renderMembers,addMemTrip,removeMember,doShare,openM,closeM
 });
 </script>
 </body>
 </html>
->
